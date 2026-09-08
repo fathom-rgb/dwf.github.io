@@ -9,12 +9,16 @@
   <meta name="description" content="戴文凡，江南大学汉语言文学专业本科在读，文理复合型内容创作者。可承接 Vibe Coding / AI 辅助网页开发、PPT 制作与信息可视化、视频剪辑与内容包装三类服务，交付成品与可编辑源文件。" />
   <meta name="keywords" content="戴文凡, 个人主页, 简历, 江南大学, 汉语言文学, 内容创作, 前端开发, Vibe Coding, AI 辅助开发, PPT 制作, PPT 设计, 视频剪辑, 信息可视化, 文案策划, 人工智能训练师" />
   <meta name="author" content="戴文凡" />
+  <link rel="canonical" href="https://dwf.github.io/" />
 
   <!-- Open Graph / 社交分享卡片 -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="戴文凡 · 汉语言文学 × 信息技术 | 个人主页" />
   <meta property="og:description" content="文理复合型内容创作者。承接 Vibe Coding 网页开发、PPT 制作、视频剪辑——把想法做成能用、能讲、能看的成品。" />
-  <meta property="og:image" content="assets/photo.jpg" />
+  <meta property="og:url" content="https://dwf.github.io/" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:image" content="https://dwf.github.io/assets/photo.jpg" />
+  <meta property="og:image:alt" content="戴文凡个人主页与作品集" />
   <meta name="twitter:card" content="summary_large_image" />
 
   <!-- 结构化数据 (Schema.org) -->
@@ -615,6 +619,34 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
   background: var(--accent-soft);
   transform: translateY(-2px);
 }
+
+/* 当前合作状态：把最重要的可用信息放在首屏，降低访客决策成本 */
+.availability {
+  margin-top: 22px;
+  width: fit-content;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  color: var(--muted);
+  background: linear-gradient(120deg, var(--surface), var(--accent-soft));
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font-size: 13px;
+  line-height: 1.55;
+  box-shadow: var(--card-shadow);
+}
+.availability-dot {
+  width: 9px;
+  height: 9px;
+  flex: none;
+  border-radius: 50%;
+  background: #2f9e67;
+  box-shadow: 0 0 0 5px rgba(47, 158, 103, 0.12);
+}
+.availability strong { color: var(--text); font-weight: 600; }
+.availability .divider { color: var(--border); }
 
 /* 行动按钮组 */
 .hero-actions {
@@ -2768,6 +2800,11 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
           <span class="hero-pill"><i class="fa-solid fa-heart-pulse"></i> 体态与健康方案</span>
         </div>
 
+        <div class="availability reveal-hero" role="status" aria-label="当前开放合作与实习机会">
+          <span class="availability-dot" aria-hidden="true"></span>
+          <span><strong>开放合作与实习机会</strong> <span class="divider" aria-hidden="true">/</span> 通常 24 小时内回复</span>
+        </div>
+
         <!-- 行动按钮 -->
         <div class="hero-actions reveal-hero">
           <a class="btn btn-primary" href="#services">
@@ -2787,7 +2824,7 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
         <div class="photo-frame-wrapper">
           <!-- 个人照片 · 动态渐变边框 -->
           <div class="photo-frame" id="photoContainer">
-            <img src="assets/photo.jpg" alt="戴文凡个人形象照片" id="heroPhoto" loading="eager" onerror="this.style.display='none'; document.getElementById('photoFallback').classList.add('active');" />
+            <img src="assets/photo.jpg" alt="戴文凡个人形象照片" id="heroPhoto" width="600" height="900" loading="eager" fetchpriority="high" />
             <!-- 当本地缺少 photo.jpg 时的自动降级占位图 -->
             <div class="photo-fallback" id="photoFallback" aria-hidden="true">
               <div class="fallback-seal">文</div>
@@ -3581,7 +3618,7 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
       <div class="footer-bottom">
         <div class="footer-copyright">
           <span class="seal-small">文</span>
-          <span>© 2026 戴文凡 (Dai Wenfan) · 汉语言文学 × 信息技术</span>
+          <span>© <span data-current-year>2026</span> 戴文凡 (Dai Wenfan) · 汉语言文学 × 信息技术</span>
         </div>
         <div class="footer-links">
           <span>江南大学 · 无锡</span>
@@ -3623,6 +3660,11 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
   const $  = (sel, ctx = document) => ctx.querySelector(sel);
   const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // 页脚年份自动更新，避免每年手动维护静态文案
+  $$('[data-current-year]').forEach((el) => {
+    el.textContent = new Date().getFullYear();
+  });
 
   /* ===========================================================
      1. 滚动状态、进度条与回到顶部
