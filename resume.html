@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>戴文凡 · 个人简历</title>
+  <link rel="canonical" href="https://fathom-rgb.github.io/dwf.github.io/resume.html" />
   <meta name="description" content="戴文凡的个人简历：江南大学汉语言文学本科在读，关注内容创作、AI 辅助网页开发与信息可视化。" />
 
   <!-- 字体：标题衬线 + 正文无衬线，与主站一致 -->
@@ -18,7 +19,7 @@
       --paper: #FFFFFF;
       --ink: #1C1917;
       --muted: #57534E;
-      --dim: #A8A29E;
+      --dim: #756B62;
       --accent: #B5432E;
       --accent-soft: #FAF0ED;
       --border: #E9E5E0;
@@ -100,13 +101,14 @@
 
     /* ===== 头部：姓名 + 照片 + 联系方式 ===== */
     .r-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 28px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: start;
+      gap: 16px 28px;
       padding-bottom: 20px;
       border-bottom: 2px solid var(--accent);
     }
+    .r-heading { min-width: 0; }
     .r-name {
       font-family: var(--serif);
       font-weight: 900;
@@ -131,6 +133,8 @@
       color: var(--accent);
     }
     .r-photo {
+      grid-column: 2;
+      grid-row: 1 / span 2;
       width: 104px;
       height: 132px;
       object-fit: cover;
@@ -140,7 +144,9 @@
     }
 
     .r-contact {
-      margin-top: 16px;
+      grid-column: 1;
+      min-width: 0;
+      margin-top: 0;
       display: flex;
       flex-wrap: wrap;
       gap: 10px 22px;
@@ -150,10 +156,12 @@
     .r-contact span {
       display: inline-flex;
       align-items: center;
+      min-width: 0;
+      overflow-wrap: anywhere;
       gap: 7px;
     }
     .r-contact i { color: var(--accent); font-size: 13px; width: 15px; text-align: center; }
-    .r-contact a { color: var(--muted); }
+    .r-contact a { color: var(--muted); min-width: 0; overflow-wrap: anywhere; }
     .r-contact a:hover { color: var(--accent); }
 
     /* ===== 章节 ===== */
@@ -220,7 +228,7 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 18px;
     }
-    .r-skill h4 {
+    .r-skill h3 {
       font-family: var(--serif);
       font-size: 14.5px;
       font-weight: 700;
@@ -230,7 +238,7 @@
       align-items: center;
       gap: 7px;
     }
-    .r-skill h4 i { font-size: 13px; }
+    .r-skill h3 i { font-size: 13px; }
     .r-skill ul { list-style: none; }
     .r-skill li {
       font-size: 13px;
@@ -272,14 +280,6 @@
       padding: 4px 13px;
     }
 
-    /* 待补充提示（浅色、斜体、虚线下划线，明确为「待填」） */
-    .todo {
-      color: var(--dim);
-      font-style: italic;
-      border-bottom: 1px dashed var(--border);
-      padding-bottom: 1px;
-    }
-
     .r-footer {
       margin-top: 28px;
       padding-top: 14px;
@@ -289,8 +289,16 @@
       text-align: center;
     }
 
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+    @media screen {
+      .r-list li, .r-skill li { font-size: 1rem; line-height: 1.85; }
+      .r-contact, .r-edu-sub, .r-tags span { font-size: 0.875rem; }
+      .print-btn, .back-link { min-height: 44px; display: inline-flex; align-items: center; gap: 6px; }
+      .toolbar { padding-inline: 18px; }
+    }
+
     /* 小屏以阅读体验优先；打印版仍保持 A4 三栏布局 */
-    @media (max-width: 720px) {
+    @media screen and (max-width: 720px) {
       body { padding: 0; background: var(--paper); }
       .toolbar { padding: 14px 18px; margin: 0; }
       .toolbar .brand { display: none; }
@@ -304,8 +312,9 @@
       .r-section { margin-top: 22px; }
     }
 
-    @media (max-width: 420px) {
-      .r-header { display: grid; grid-template-columns: 1fr auto; }
+    @media screen and (max-width: 420px) {
+      .r-header { grid-template-columns: minmax(0, 1fr) auto; gap: 16px 12px; }
+      .r-photo { grid-row: 1; }
       .r-contact { grid-column: 1 / -1; margin-top: 0; }
       .print-btn { padding: 8px 13px; }
     }
@@ -315,6 +324,8 @@
       @page { size: A4; margin: 14mm; }
       body { background: #fff; padding: 0; }
       .toolbar { display: none; }
+      .r-proj, .r-skill, .r-header { break-inside: avoid; }
+      .r-sec-title, .r-proj-title { break-after: avoid; }
       .sheet {
         width: auto;
         box-shadow: none;
@@ -339,20 +350,20 @@
   <main class="sheet">
     <!-- 头部 -->
     <header class="r-header">
-      <div>
-        <div class="r-name">
+      <div class="r-heading">
+        <h1 class="r-name">
           戴文凡
           <span class="en">DAI WENFAN</span>
-        </div>
+        </h1>
         <div class="r-role">汉语言文学 · 江南大学 · 本科在读</div>
+      </div>
         <div class="r-contact">
           <span><i class="fa-solid fa-phone"></i><a href="tel:18258279827">182 5827 9827</a></span>
           <span><i class="fa-solid fa-envelope"></i><a href="mailto:3385901144@qq.com">3385901144@qq.com</a></span>
           <span><i class="fa-brands fa-weixin"></i>www_dwf_com</span>
           <span><i class="fa-solid fa-location-dot"></i>江苏 · 无锡</span>
         </div>
-      </div>
-      <img class="r-photo" src="assets/photo.jpg" alt="戴文凡证件照" />
+      <img class="r-photo" src="assets/photo.jpg" width="600" height="900" alt="戴文凡证件照" />
     </header>
 
     <!-- 教育背景 -->
@@ -365,7 +376,7 @@
       <p class="r-edu-sub">中国语言文学类 · 本科在读</p>
       <ul class="r-list">
         <li>系统学习中国语言文学理论、写作与文本分析，具备扎实的文字功底与逻辑表达能力。</li>
-        <li>主修课程：现代汉语、古代文学、文学理论、写作学、<span class="todo">【待补：如语言学概论等】</span>。</li>
+        <li>学习方向：现代汉语、古代文学、文学理论与写作。</li>
         <li>在校期间积极拓展跨学科技能，兼修信息技术与内容创作方向，形成「文理复合」能力结构。</li>
       </ul>
     </section>
@@ -375,7 +386,7 @@
       <h2 class="r-sec-title">专业技能</h2>
       <div class="r-skills">
         <div class="r-skill">
-          <h4><i class="fa-solid fa-microchip"></i>信息技术</h4>
+          <h3><i class="fa-solid fa-microchip"></i>信息技术</h3>
           <ul>
             <li>熟练运用 Vibe Coding 辅助开发思路，借助 AI 工具高效完成轻量级程序与网页搭建。</li>
             <li>具备网页制作能力，可独立完成静态页面的结构搭建与样式设计。</li>
@@ -384,7 +395,7 @@
           </ul>
         </div>
         <div class="r-skill">
-          <h4><i class="fa-solid fa-pen-nib"></i>内容创作</h4>
+          <h3><i class="fa-solid fa-pen-nib"></i>内容创作</h3>
           <ul>
             <li>具备文案设计能力，擅长根据宣传、社交媒体、活动策划等不同场景调整语言风格。</li>
             <li>文字表达能力强，能够将复杂信息转化为易读、有感染力的内容。</li>
@@ -392,7 +403,7 @@
           </ul>
         </div>
         <div class="r-skill">
-          <h4><i class="fa-solid fa-heart-pulse"></i>运动健康</h4>
+          <h3><i class="fa-solid fa-heart-pulse"></i>运动健康</h3>
           <ul>
             <li>具备运动康复相关知识，了解基础损伤预防与恢复原理。</li>
             <li>掌握体态矫正方法，能识别常见体态问题并制定针对性调整方案。</li>
@@ -408,19 +419,19 @@
       <h2 class="r-sec-title">可提供服务</h2>
       <div class="r-skills">
         <div class="r-skill">
-          <h4><i class="fa-solid fa-wand-magic-sparkles"></i>Vibe Coding · 网页开发</h4>
+          <h3><i class="fa-solid fa-wand-magic-sparkles"></i>Vibe Coding · 网页开发</h3>
           <ul>
             <li>个人主页、作品集、活动落地页与轻量自动化小工具，交付可上线成品与完整源码。</li>
           </ul>
         </div>
         <div class="r-skill">
-          <h4><i class="fa-solid fa-chalkboard-user"></i>PPT 制作 · 信息可视化</h4>
+          <h3><i class="fa-solid fa-chalkboard-user"></i>PPT 制作 · 信息可视化</h3>
           <ul>
             <li>汇报答辩、竞赛路演与项目提案 PPT：逻辑梳理、图表可视化、统一版式与逐页讲稿。</li>
           </ul>
         </div>
         <div class="r-skill">
-          <h4><i class="fa-solid fa-film"></i>视频剪辑 · 内容包装</h4>
+          <h3><i class="fa-solid fa-film"></i>视频剪辑 · 内容包装</h3>
           <ul>
             <li>Vlog、宣传片、口播与竖屏短视频剪辑，含节奏把控、字幕、封面与标题文案。</li>
           </ul>
@@ -433,20 +444,19 @@
       <h2 class="r-sec-title">项目经历</h2>
 
       <div class="r-proj">
-        <div class="r-proj-title">校园 / 自主内容创作项目 <span class="tag">进行中</span></div>
+        <h3 class="r-proj-title">个人在线主页与打印简历 <span class="tag">持续迭代</span></h3>
         <ul class="r-list">
-          <li>基于文案设计与新媒体传播逻辑，策划并产出 <span class="todo">【待补：数量】</span> 篇原创内容，涉及 <span class="todo">【待补：主题方向】</span>。</li>
-          <li>运用 PPT、网页制作等工具，独立完成 <span class="todo">【待补：项目名称】</span> 的可视化呈现与信息架构设计。</li>
-          <li>借助 Vibe Coding 辅助开发思路，快速搭建 <span class="todo">【待补：小工具 / 网页 / 小程序名称】</span> 原型，验证产品设计逻辑。</li>
+          <li>使用原生 HTML、CSS 与 JavaScript 搭建个人主页，整理个人介绍、服务、技能与项目展示。</li>
+          <li>实现亮暗主题、项目分类筛选、联系方式复制与证书查看，并为手机阅读和键盘操作优化交互。</li>
+          <li>制作独立简历页面，支持 A4 打印及浏览器导出 PDF，让线上展示与投递材料保持一致。</li>
         </ul>
       </div>
 
       <div class="r-proj">
-        <div class="r-proj-title">个人体能训练与体态矫正实践项目 <span class="tag">进行中</span></div>
+        <h3 class="r-proj-title">个人体能训练与体态管理实践 <span class="tag">进行中</span></h3>
         <ul class="r-list">
-          <li>结合运动康复与体态矫正知识，为 <span class="todo">【待补：自己 / 身边同学朋友】</span> 制定个性化训练与饮食方案。</li>
-          <li>通过系统训练计划实施，实现体态改善 / 体能提升 <span class="todo">【待补：具体量化效果，如「体脂率下降 X%」】</span>。</li>
-          <li>将运动健康知识与内容创作能力结合，产出相关科普文案，传播健康运动理念。</li>
+          <li>围绕个人体能训练与体态管理，探索训练计划、饮食结构与日常习惯之间的联系。</li>
+          <li>尝试把运动健康知识整理为清晰、易理解的科普文案与训练说明，结合内容创作能力持续完善。</li>
         </ul>
       </div>
     </section>
