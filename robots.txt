@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fathom-rgb.github.io/dwf.github.io/sitemap.xml

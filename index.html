@@ -4,17 +4,33 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#FDFDFB" data-dynamic />
-  <script>document.documentElement.classList.remove('no-js'); document.documentElement.classList.add('js');</script>
+  <script>
+    // 在首次绘制前应用有效主题，避免深色模式闪白；存储不可用时仍可阅读。
+    (function () {
+      const root = document.documentElement;
+      let saved = null;
+      try { saved = localStorage.getItem('site-theme'); } catch (e) {}
+      const theme = saved === 'light' || saved === 'dark'
+        ? saved : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      root.dataset.theme = theme;
+      root.classList.replace('no-js', 'js');
+      document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#141211' : '#FDFDFB';
+    })();
+  </script>
   <title>戴文凡 · 汉语言文学 × 信息技术 | 个人主页 & 作品集</title>
   <meta name="description" content="戴文凡，江南大学汉语言文学专业本科在读，文理复合型内容创作者。可承接 Vibe Coding / AI 辅助网页开发、PPT 制作与信息可视化、视频剪辑与内容包装三类服务，交付成品与可编辑源文件。" />
   <meta name="keywords" content="戴文凡, 个人主页, 简历, 江南大学, 汉语言文学, 内容创作, 前端开发, Vibe Coding, AI 辅助开发, PPT 制作, PPT 设计, 视频剪辑, 信息可视化, 文案策划, 人工智能训练师" />
   <meta name="author" content="戴文凡" />
+  <link rel="canonical" href="https://fathom-rgb.github.io/dwf.github.io/" />
 
   <!-- Open Graph / 社交分享卡片 -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="戴文凡 · 汉语言文学 × 信息技术 | 个人主页" />
   <meta property="og:description" content="文理复合型内容创作者。承接 Vibe Coding 网页开发、PPT 制作、视频剪辑——把想法做成能用、能讲、能看的成品。" />
-  <meta property="og:image" content="assets/photo.jpg" />
+  <meta property="og:url" content="https://fathom-rgb.github.io/dwf.github.io/" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:image" content="https://fathom-rgb.github.io/dwf.github.io/assets/photo.jpg" />
+  <meta property="og:image:alt" content="戴文凡个人主页与作品集" />
   <meta name="twitter:card" content="summary_large_image" />
 
   <!-- 结构化数据 (Schema.org) -->
@@ -106,7 +122,7 @@
   --surface-hover: #FCFAF7;      /* 卡片悬停 */
   --text: #1C1917;              /* 徽墨黑 */
   --muted: #57534E;             /* 润墨灰 */
-  --dim: #8C827A;               /* 浅灰辅助 */
+  --dim: #756B62;               /* 浅灰辅助 */
   --border: #E8E3DC;            /* 纸质细腻边框 */
   --border-light: #F0ECE6;      /* 极浅分隔线 */
   
@@ -135,7 +151,7 @@
   --surface-hover: #292522;
   --text: #F3EFEA;              /* 象牙白 */
   --muted: #B8B0A6;             /* 银灰 */
-  --dim: #7C746B;               /* 昏灰 */
+  --dim: #B2A69B;               /* 昏灰 */
   --border: #332D28;            /* 暗调边框 */
   --border-light: #26221E;
   
@@ -200,6 +216,7 @@ a {
 
 ul { list-style: none; }
 button { font-family: inherit; }
+[hidden] { display: none !important; }
 a, button, [role="button"], .copyable { touch-action: manipulation; }
 
 /* 选中文本高亮 */
@@ -615,6 +632,34 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
   background: var(--accent-soft);
   transform: translateY(-2px);
 }
+
+/* 当前合作状态：把最重要的可用信息放在首屏，降低访客决策成本 */
+.availability {
+  margin-top: 22px;
+  width: fit-content;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  color: var(--muted);
+  background: linear-gradient(120deg, var(--surface), var(--accent-soft));
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font-size: 13px;
+  line-height: 1.55;
+  box-shadow: var(--card-shadow);
+}
+.availability-dot {
+  width: 9px;
+  height: 9px;
+  flex: none;
+  border-radius: 50%;
+  background: #2f9e67;
+  box-shadow: 0 0 0 5px rgba(47, 158, 103, 0.12);
+}
+.availability strong { color: var(--text); font-weight: 600; }
+.availability .divider { color: var(--border); }
 
 /* 行动按钮组 */
 .hero-actions {
@@ -1182,6 +1227,7 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
   color: var(--dim);
 }
 .cert-frame {
+  display: block;
   position: relative;
   border-radius: 14px;
   overflow: hidden;
@@ -1194,7 +1240,6 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
 .cert-frame:focus-visible {
   border-color: var(--accent-glow);
   box-shadow: 0 16px 40px var(--accent-glow);
-  outline: none;
 }
 .cert-img {
   display: block;
@@ -1263,30 +1308,31 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
   line-height: 1.5;
 }
 
-/* 证书大图灯箱 */
+/* 原生模态窗口负责焦点约束与 Escape 关闭。 */
 .lightbox {
   position: fixed;
   inset: 0;
-  z-index: 1200;
-  background: rgba(20, 18, 17, 0.92);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: clamp(18px, 4vw, 48px);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  border: 0;
+  padding: 80px clamp(18px, 4vw, 48px) 24px;
+  background: rgba(20, 18, 17, 0.94);
+  color: #fff;
 }
-.lightbox.open { opacity: 1; visibility: visible; }
+.lightbox:not([open]) { display: none; }
+.lightbox[open] { display: flex; align-items: center; justify-content: center; }
+.lightbox::backdrop { background: rgba(20, 18, 17, 0.85); }
 .lightbox-img {
   max-width: 100%;
   max-height: 100%;
+  object-fit: contain;
   border-radius: 10px;
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
-  transform: scale(0.94);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.lightbox.open .lightbox-img { transform: scale(1); }
 .lightbox-close {
   position: absolute;
   top: 22px;
@@ -2618,6 +2664,45 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
   }
 }
 
+/* 阅读与触控：保持现有配色，让正文、联系信息和按钮更清晰。 */
+.sec-subtitle, .proj-desc, .service-desc { font-size: 1rem; }
+.hero-pill, .availability, .card-list li, .proj-action-btn { font-size: 0.875rem; }
+.card-header h2, .card-list .k, .contact-item .c-label { font-size: 0.875rem; }
+.badge-status, .card-list .v small, .copy-action-btn { font-size: 0.8125rem; }
+.hero-side, .hero-content, .card-list > li, .card-list .v, .contact-item .c-info { min-width: 0; }
+.card-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.card-list .v, .contact-item .c-val { overflow-wrap: anywhere; }
+.card-header { flex-wrap: wrap; gap: 8px; }
+.theme-toggle, .nav-menu-toggle { min-width: 44px; min-height: 44px; }
+.filter-btn, .proj-action-btn, .card-list li.copyable { min-height: 44px; }
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+/* 关闭脚本时仍展示完整内容和导航，不留下无效的交互控件。 */
+.no-js .reveal, .no-js .reveal-hero { opacity: 1; transform: none; animation: none; }
+.no-js .skill-meter > span { width: var(--fill); }
+.no-js .theme-toggle, .no-js .nav-menu-toggle, .no-js .project-filters,
+.no-js .back-to-top, .no-js .typing-cursor, .no-js .copy-action-btn, .no-js .copy-icon { display: none; }
+.no-js .nav { position: static; }
+.no-js .nav-inner { flex-wrap: wrap; height: auto; min-height: 68px; padding-block: 12px; }
+.no-js .nav-links { display: flex; flex-wrap: wrap; flex-basis: 100%; order: 3; }
+.no-js .hero { padding-top: 3rem; }
+.no-js .copyable { cursor: text; }
+@media (max-width: 540px) {
+  .card-list { grid-template-columns: minmax(0, 1fr); }
+  .card-list li.full, .card-list li.stack { flex-wrap: wrap; gap: 4px 12px; }
+  .hero-intro { min-height: 6em; }
+  .contact-item { padding: 14px; gap: 10px; }
+}
+
 /* =============================================================
    打印样式优化 (Print Stylesheet)
    ============================================================= */
@@ -2659,8 +2744,12 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
 
 /* 动效降级偏好 */
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .typing-cursor { display: none; }
   * {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
   }
   .reveal, .reveal-hero {
@@ -2676,7 +2765,7 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
 
   <!-- ============ 顶部导航 ============ -->
   <nav class="nav" id="nav" aria-label="主导航">
-    <div class="nav-progress" id="navProgress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+    <div class="nav-progress" id="navProgress" role="progressbar" aria-label="页面阅读进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
     <div class="container nav-inner">
       <a class="nav-brand" href="#top" aria-label="戴文凡 个人主页首页">
         <span class="seal" aria-hidden="true">文</span>
@@ -2713,7 +2802,7 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
     </div>
 
     <!-- 移动端抽屉菜单 -->
-    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true" hidden>
       <div class="mobile-menu-inner">
         <a href="#about" class="mobile-nav-link"><i class="fa-regular fa-user"></i> 关于我</a>
         <a href="#services" class="mobile-nav-link"><i class="fa-solid fa-handshake-angle"></i> 我能为你做什么</a>
@@ -2751,7 +2840,8 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
 
         <!-- 动态打字机效果区域 -->
         <p class="hero-intro reveal-hero">
-          <span class="typewriter-text" id="typewriterText" data-phrases='[
+          <span class="sr-only">用文字与代码，把复杂的信息拆解、重组，转化为清晰、有感染力的表达。</span>
+          <span class="typewriter-text" id="typewriterText" aria-hidden="true" data-phrases='[
             "用文字与代码，把复杂的信息拆解、重组，转化为清晰、有感染力的表达。",
             "文理兼修，以文字立骨，以技术为翼。",
             "擅长结构化写作、AI 辅助开发与信息可视化排版。",
@@ -2766,6 +2856,11 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
           <span class="hero-pill"><i class="fa-solid fa-chalkboard-user"></i> PPT 信息可视化</span>
           <span class="hero-pill"><i class="fa-solid fa-film"></i> 视频剪辑包装</span>
           <span class="hero-pill"><i class="fa-solid fa-heart-pulse"></i> 体态与健康方案</span>
+        </div>
+
+        <div class="availability reveal-hero" aria-label="当前开放合作与实习机会">
+          <span class="availability-dot" aria-hidden="true"></span>
+          <span><strong>开放合作与实习机会</strong> <span class="divider" aria-hidden="true">/</span> 欢迎交流具体需求</span>
         </div>
 
         <!-- 行动按钮 -->
@@ -2787,7 +2882,7 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
         <div class="photo-frame-wrapper">
           <!-- 个人照片 · 动态渐变边框 -->
           <div class="photo-frame" id="photoContainer">
-            <img src="assets/photo.jpg" alt="戴文凡个人形象照片" id="heroPhoto" loading="eager" onerror="this.style.display='none'; document.getElementById('photoFallback').classList.add('active');" />
+            <img src="assets/photo.jpg" alt="戴文凡个人形象照片" id="heroPhoto" width="600" height="900" loading="eager" fetchpriority="high" />
             <!-- 当本地缺少 photo.jpg 时的自动降级占位图 -->
             <div class="photo-fallback" id="photoFallback" aria-hidden="true">
               <div class="fallback-seal">文</div>
@@ -3125,10 +3220,10 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
             <span class="cert-badge"><i class="fa-solid fa-award"></i> 人工智能训练师证书 <em>· AI TRAINER (ADVANCED)</em></span>
             <span class="cert-tip">点击图片查看高清大图</span>
           </div>
-          <div class="cert-frame" data-cert-lightbox tabindex="0" role="button" aria-label="查看「人工智能训练师证书（高级）」高清大图">
+          <a class="cert-frame" href="assets/certificate.jpg" data-cert-lightbox aria-label="查看「人工智能训练师证书（高级）」高清大图">
             <img class="cert-img" src="assets/certificate.jpg" alt="人工智能训练师证书（高级）· 达摩院 · 阿里云" loading="lazy" />
             <div class="cert-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i> 点击放大</div>
-          </div>
+          </a>
           <ul class="cert-meta">
             <li><span class="m-k">证书编号</span><span class="m-v">AIT260730230604000131</span></li>
             <li><span class="m-k">颁证机构</span><span class="m-v">达摩院 · 机器智能技术事业部</span></li>
@@ -3311,12 +3406,14 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
         </div>
 
         <!-- 分类筛选器 -->
-        <div class="project-filters reveal" id="projectFilters">
-          <button class="filter-btn active" data-filter="all">全部项目 (4)</button>
-          <button class="filter-btn" data-filter="tech">技术 & 前端</button>
-          <button class="filter-btn" data-filter="content">文案 & 策划</button>
-          <button class="filter-btn" data-filter="health">运动 & 健康</button>
+        <div class="project-filters reveal" id="projectFilters" role="group" aria-label="按项目类型筛选">
+          <button class="filter-btn active" data-filter="all" type="button" aria-controls="projectList" aria-pressed="true">全部项目 (4)</button>
+          <button class="filter-btn" data-filter="tech" type="button" aria-controls="projectList" aria-pressed="false">技术 & 前端</button>
+          <button class="filter-btn" data-filter="content" type="button" aria-controls="projectList" aria-pressed="false">文案 & 策划</button>
+          <button class="filter-btn" data-filter="health" type="button" aria-controls="projectList" aria-pressed="false">运动 & 健康</button>
         </div>
+
+        <p class="sr-only" id="projectStatus" role="status" aria-live="polite" aria-atomic="true"></p>
 
         <!-- 项目列表 -->
         <div class="proj-grid" id="projectList">
@@ -3334,7 +3431,7 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
               </p>
               <div class="proj-metrics">
                 <div class="metric"><span class="m-val">100%</span><span class="m-lbl">响应式适配</span></div>
-                <div class="metric"><span class="m-val">&lt;100ms</span><span class="m-lbl">轻量首屏</span></div>
+                <div class="metric"><span class="m-val">零构建</span><span class="m-lbl">静态页面</span></div>
                 <div class="metric"><span class="m-val">A4 矢量</span><span class="m-lbl">精准打印</span></div>
               </div>
               <div class="proj-tags">
@@ -3534,7 +3631,7 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
         <div class="footer-right reveal">
           <div class="contact-card">
             <h3 class="contact-card-title">快捷联系通道</h3>
-            <p class="contact-card-tip">点击条目即可快速复制信息或发起呼叫：</p>
+            <p class="contact-card-tip">点击条目复制邮箱、电话或微信号：</p>
             
             <ul class="contact-list">
               <li class="contact-item copyable" data-copy="3385901144@qq.com" title="点击复制邮箱">
@@ -3581,7 +3678,7 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
       <div class="footer-bottom">
         <div class="footer-copyright">
           <span class="seal-small">文</span>
-          <span>© 2026 戴文凡 (Dai Wenfan) · 汉语言文学 × 信息技术</span>
+          <span>© <span data-current-year>2026</span> 戴文凡 (Dai Wenfan) · 汉语言文学 × 信息技术</span>
         </div>
         <div class="footer-links">
           <span>江南大学 · 无锡</span>
@@ -3609,10 +3706,10 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
   <div class="toast" id="toast" role="status" aria-live="polite">已复制到剪贴板</div>
 
   <!-- 证书大图灯箱 -->
-  <div class="lightbox" id="certLightbox" role="dialog" aria-modal="true" aria-label="证书高清大图" aria-hidden="true">
+  <dialog class="lightbox" id="certLightbox" aria-label="证书高清大图">
     <button class="lightbox-close" id="lightboxClose" type="button" aria-label="关闭大图"><i class="fa-solid fa-xmark"></i></button>
-    <img class="lightbox-img" id="lightboxImg" src="" alt="证书高清大图" />
-  </div>
+    <img class="lightbox-img" id="lightboxImg" alt="人工智能训练师证书（高级）高清大图" />
+  </dialog>
 
   <!-- ============ 内嵌完整交互脚本 (免去单独创建 js 文件夹) ============ -->
   <script>
@@ -3623,6 +3720,11 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
   const $  = (sel, ctx = document) => ctx.querySelector(sel);
   const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // 页脚年份自动更新，避免每年手动维护静态文案
+  $$('[data-current-year]').forEach((el) => {
+    el.textContent = new Date().getFullYear();
+  });
 
   /* ===========================================================
      1. 滚动状态、进度条与回到顶部
@@ -3667,7 +3769,7 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
 
   if (backToTop) {
     backToTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
     });
   }
 
@@ -3679,40 +3781,63 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
   const menuIcon = $('#menuIcon');
   const mobileLinks = $$('.mobile-nav-link');
 
+  const mobileViewport = window.matchMedia('(max-width: 768px)');
+  let menuScrollStyle = '';
+
   function toggleMobileMenu(open) {
     if (!menuToggle || !mobileMenu) return;
-    const isOpen = typeof open === 'boolean' ? open : !mobileMenu.classList.contains('open');
-    menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    mobileMenu.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
-    mobileMenu.classList.toggle('open', isOpen);
-    // 抽屉展开时锁定背景滚动，避免穿透
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-    if (menuIcon) {
-      menuIcon.className = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
-    }
+    const wasOpen = mobileMenu.classList.contains('open');
+    const isOpen = (typeof open === 'boolean' ? open : !wasOpen) && mobileViewport.matches;
+    if (isOpen === wasOpen) return;
+    if (isOpen) menuScrollStyle = document.body.style.overflow;
+    menuToggle.setAttribute('aria-expanded', String(isOpen));
     menuToggle.setAttribute('aria-label', isOpen ? '关闭菜单' : '打开菜单');
+    mobileMenu.setAttribute('aria-hidden', String(!isOpen));
+    mobileMenu.hidden = !isOpen;
+    mobileMenu.classList.toggle('open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : menuScrollStyle;
+    if (menuIcon) menuIcon.className = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+    if (isOpen) mobileLinks[0]?.focus();
+    else if (mobileMenu.contains(document.activeElement)) {
+      if (mobileViewport.matches) menuToggle.focus({ preventScroll: true });
+      else $('.nav-brand')?.focus({ preventScroll: true });
+    }
   }
 
   if (menuToggle && mobileMenu) {
-    menuToggle.addEventListener('click', (e) => {
-      e.stopPropagation();
-      toggleMobileMenu();
-    });
-
+    menuToggle.addEventListener('click', () => toggleMobileMenu());
     mobileLinks.forEach((link) => {
-      link.addEventListener('click', () => toggleMobileMenu(false));
+      link.addEventListener('click', () => {
+        toggleMobileMenu(false);
+        const href = link.getAttribute('href');
+        const target = href?.startsWith('#') ? $(href) : null;
+        if (target) {
+          target.setAttribute('tabindex', '-1');
+          target.focus({ preventScroll: true });
+        }
+      });
     });
-
     document.addEventListener('click', (e) => {
-      if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+      if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) toggleMobileMenu(false);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (!mobileMenu.classList.contains('open')) return;
+      if (e.key === 'Escape') {
+        e.preventDefault();
         toggleMobileMenu(false);
+      } else if (e.key === 'Tab') {
+        const last = mobileLinks[mobileLinks.length - 1];
+        if (e.shiftKey && document.activeElement === menuToggle) {
+          e.preventDefault();
+          last?.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          menuToggle.focus();
+        }
       }
     });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
-        toggleMobileMenu(false);
-      }
+    mobileViewport.addEventListener('change', (e) => {
+      if (!e.matches) toggleMobileMenu(false);
     });
   }
 
@@ -3741,7 +3866,8 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
   if (typewriterEl && !prefersReducedMotion) {
     let phrases = [];
     try {
-      phrases = JSON.parse(typewriterEl.getAttribute('data-phrases') || '[]');
+      const parsed = JSON.parse(typewriterEl.getAttribute('data-phrases') || '[]');
+      if (Array.isArray(parsed)) phrases = parsed.filter((phrase) => typeof phrase === 'string' && phrase.length > 0);
     } catch (e) {
       phrases = [typewriterEl.textContent.trim()];
     }
@@ -3749,10 +3875,14 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
     if (phrases.length > 1) {
       let phraseIdx = 0;
       let charIdx = phrases[0].length;
-      let isDeleting = false;
+      let isDeleting = true; // 首句已完整显示，先删除再轮播。
       let typingDelay = 70;
+      let typingTimer = null;
+      typewriterEl.textContent = phrases[0];
 
       function typeLoop() {
+        typingTimer = null;
+        if (document.hidden) return;
         const currentPhrase = phrases[phraseIdx];
         if (isDeleting) {
           charIdx--;
@@ -3764,7 +3894,7 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
           typingDelay = 70;
         }
 
-        if (!isDeleting && charIdx === currentPhrase.length) {
+        if (!isDeleting && charIdx >= currentPhrase.length) {
           typingDelay = 3200; // 打完停留时间
           isDeleting = true;
         } else if (isDeleting && charIdx === 0) {
@@ -3773,11 +3903,15 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
           typingDelay = 400; // 删完换下一句前停留
         }
 
-        setTimeout(typeLoop, typingDelay);
+        typingTimer = setTimeout(typeLoop, typingDelay);
       }
 
       // 延迟启动，避免首屏干扰
-      setTimeout(typeLoop, 2500);
+      typingTimer = setTimeout(typeLoop, 3200);
+      document.addEventListener('visibilitychange', () => {
+        clearTimeout(typingTimer);
+        typingTimer = document.hidden ? null : setTimeout(typeLoop, 400);
+      });
     }
   }
 
@@ -3785,10 +3919,12 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
      5. Canvas 粒子背景系统 (高性能轻量化)
      =========================================================== */
   const canvas = $('#particleCanvas');
-  if (canvas && !prefersReducedMotion) {
-    const ctx = canvas.getContext('2d');
+  let ctx = null;
+  try { ctx = canvas && !prefersReducedMotion ? canvas.getContext('2d') : null; } catch (e) {}
+  if (ctx) {
     let particles = [];
-    let animationFrameId;
+    let animationFrameId = null;
+    let heroVisible = true;
 
     function resizeCanvas() {
       canvas.width = window.innerWidth;
@@ -3813,6 +3949,7 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
     }
 
     function drawParticles() {
+      if (document.hidden || !heroVisible) { animationFrameId = null; return; }
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
       const color = isDark ? '224, 120, 90' : '181, 67, 46';
@@ -3839,9 +3976,22 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
       animationFrameId = requestAnimationFrame(drawParticles);
     }
 
+    function syncParticleAnimation() {
+      if (animationFrameId !== null) cancelAnimationFrame(animationFrameId);
+      animationFrameId = null;
+      if (!document.hidden && heroVisible) drawParticles();
+    }
     window.addEventListener('resize', resizeCanvas, { passive: true });
+    document.addEventListener('visibilitychange', syncParticleAnimation);
+    if ('IntersectionObserver' in window) {
+      const heroObserver = new IntersectionObserver(([entry]) => {
+        heroVisible = entry.isIntersecting;
+        syncParticleAnimation();
+      });
+      heroObserver.observe(canvas);
+    }
     resizeCanvas();
-    drawParticles();
+    syncParticleAnimation();
   }
 
   /* ===========================================================
@@ -3883,37 +4033,34 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
   const themeToggle = $('#themeToggle');
   const root = document.documentElement;
 
+  const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+  let hasThemePreference = false;
+  try { hasThemePreference = ['light', 'dark'].includes(localStorage.getItem('site-theme')); } catch (e) {}
+
   function applyTheme(theme) {
     root.setAttribute('data-theme', theme);
-    // 同步移动端浏览器地址栏颜色
-    const themeColor = document.querySelector('meta[name="theme-color"][data-dynamic]');
+    const themeColor = $('meta[name="theme-color"][data-dynamic]');
     if (themeColor) themeColor.setAttribute('content', theme === 'dark' ? '#141211' : '#FDFDFB');
     if (themeToggle) {
       themeToggle.innerHTML = theme === 'dark'
-        ? '<i class="fa-solid fa-sun"></i>'
-        : '<i class="fa-solid fa-moon"></i>';
-      themeToggle.setAttribute('aria-label', theme === 'dark' ? '切换为亮色模式' : '切换为暗色模式');
+        ? '<i class="fa-solid fa-sun" aria-hidden="true"></i>'
+        : '<i class="fa-solid fa-moon" aria-hidden="true"></i>';
+      const label = theme === 'dark' ? '切换为亮色模式' : '切换为暗色模式';
+      themeToggle.setAttribute('aria-label', label);
+      themeToggle.setAttribute('title', label);
     }
-    try {
-      localStorage.setItem('site-theme', theme);
-    } catch (e) {}
   }
 
-  // 读取本地偏好或系统偏好
-  let savedTheme = null;
-  try {
-    savedTheme = localStorage.getItem('site-theme');
-  } catch (e) {}
-
-  if (!savedTheme) {
-    savedTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  }
-  applyTheme(savedTheme);
-
+  applyTheme(root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light');
+  systemTheme.addEventListener('change', (e) => {
+    if (!hasThemePreference) applyTheme(e.matches ? 'dark' : 'light');
+  });
   if (themeToggle) {
     themeToggle.addEventListener('click', () => {
-      const current = root.getAttribute('data-theme');
-      applyTheme(current === 'dark' ? 'light' : 'dark');
+      const theme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      hasThemePreference = true;
+      applyTheme(theme);
+      try { localStorage.setItem('site-theme', theme); } catch (e) {}
     });
   }
 
@@ -3934,19 +4081,24 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
 
   filterBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
-      filterBtns.forEach((b) => b.classList.remove('active'));
-      btn.classList.add('active');
+      filterBtns.forEach((b) => {
+        b.classList.toggle('active', b === btn);
+        b.setAttribute('aria-pressed', String(b === btn));
+      });
 
       const filter = btn.getAttribute('data-filter');
       projectCards.forEach((card) => {
         const category = card.getAttribute('data-category');
-        if (filter === 'all' || category === filter) {
+        card.hidden = !(filter === 'all' || category === filter);
+        if (!card.hidden) {
           card.classList.remove('hide');
-          setTimeout(() => card.classList.add('in'), 50);
+          card.classList.add('in');
         } else {
           card.classList.add('hide');
         }
       });
+      const status = $('#projectStatus');
+      if (status) status.textContent = btn.textContent + '，显示 ' + projectCards.filter((card) => !card.hidden).length + ' 个项目';
     });
   });
 
@@ -3967,25 +4119,33 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
   }
 
   // 剪贴板写入：优先用异步 API，本地 file:// 等非安全上下文自动回退
-  function copyText(text) {
+  async function copyText(text) {
     if (navigator.clipboard && window.isSecureContext) {
-      return navigator.clipboard.writeText(text);
-    }
-    return new Promise((resolve, reject) => {
       try {
-        const ta = document.createElement('textarea');
-        ta.value = text;
-        ta.setAttribute('readonly', '');
-        ta.style.cssText = 'position:fixed;top:-1000px;left:-1000px;opacity:0;';
-        document.body.appendChild(ta);
-        ta.select();
-        const ok = document.execCommand('copy');
-        document.body.removeChild(ta);
-        ok ? resolve() : reject(new Error('copy failed'));
-      } catch (err) {
-        reject(err);
+        await navigator.clipboard.writeText(text);
+        return;
+      } catch (e) { /* 拒绝异步剪贴板时，继续尝试本地复制。 */ }
+    }
+    const previousFocus = document.activeElement;
+    const selection = window.getSelection();
+    const ranges = selection ? Array.from({ length: selection.rangeCount }, (_, i) => selection.getRangeAt(i).cloneRange()) : [];
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0;font-size:16px;';
+    try {
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, text.length);
+      if (!document.execCommand('copy')) throw new Error('copy failed');
+    } finally {
+      ta.remove();
+      previousFocus?.focus({ preventScroll: true });
+      if (selection) {
+        selection.removeAllRanges();
+        ranges.forEach((range) => selection.addRange(range));
       }
-    });
+    }
   }
 
   $$('.copyable').forEach((item) => {
@@ -4076,7 +4236,7 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
       const href = a.getAttribute('href');
       const match = href === '#' + targetId || (targetId === 'top' && (href === '#top' || href === '#'));
       a.classList.toggle('active', match);
-      if (match) a.setAttribute('aria-current', 'page');
+      if (match) a.setAttribute('aria-current', 'location');
       else a.removeAttribute('aria-current');
     });
   }
@@ -4099,10 +4259,13 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
   const heroPhoto = $('#heroPhoto');
   const photoFallback = $('#photoFallback');
   if (heroPhoto && photoFallback) {
-    heroPhoto.addEventListener('error', () => {
+    const showPhotoFallback = () => {
       heroPhoto.style.display = 'none';
       photoFallback.classList.add('active');
-    });
+      photoFallback.setAttribute('aria-hidden', 'false');
+    };
+    heroPhoto.addEventListener('error', showPhotoFallback);
+    if (heroPhoto.complete && heroPhoto.naturalWidth === 0) showPhotoFallback();
   }
 
   /* ===========================================================
@@ -4113,37 +4276,30 @@ a, button, [role="button"], .copyable { touch-action: manipulation; }
   const lightboxImg = $('#lightboxImg');
   const lightboxClose = $('#lightboxClose');
 
-  if (certFrame && lightbox && lightboxImg && lightboxClose) {
+  if (certFrame && lightbox && lightboxImg && lightboxClose && typeof lightbox.showModal === 'function') {
     const certImg = $('.cert-img', certFrame);
-    const certSrc = certImg ? certImg.getAttribute('src') : '';
+    let lightboxScrollStyle = '';
+    certFrame.setAttribute('aria-haspopup', 'dialog');
+    certFrame.setAttribute('aria-controls', 'certLightbox');
 
-    const openLightbox = () => {
-      lightboxImg.src = certSrc;
-      lightbox.classList.add('open');
-      lightbox.setAttribute('aria-hidden', 'false');
+    certFrame.addEventListener('click', (e) => {
+      if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+      e.preventDefault();
+      if (lightbox.open) return;
+      lightboxImg.src = certImg?.getAttribute('src') || certFrame.href;
+      lightboxScrollStyle = document.body.style.overflow;
+      lightbox.showModal();
       document.body.style.overflow = 'hidden';
       lightboxClose.focus();
-    };
-    const closeLightbox = () => {
-      lightbox.classList.remove('open');
-      lightbox.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-      certFrame.focus();
-    };
-
-    certFrame.addEventListener('click', openLightbox);
-    certFrame.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        openLightbox();
-      }
     });
-    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxClose.addEventListener('click', () => lightbox.close());
     lightbox.addEventListener('click', (e) => {
-      if (e.target === lightbox) closeLightbox();
+      if (e.target === lightbox) lightbox.close();
     });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+    // 包含 Escape、关闭按钮和背景点击的全部关闭路径。
+    lightbox.addEventListener('close', () => {
+      document.body.style.overflow = lightboxScrollStyle;
+      certFrame.focus({ preventScroll: true });
     });
   }
 
