@@ -26,7 +26,7 @@
 | `assets/motion.css`、`assets/motion.js` | 视觉增强、标题揭示、滚动渐入、照片倾斜与交互过渡 |
 | `resume.html` | 简历；独立屏幕与打印样式 |
 | `assets/photo.jpg` | 原有个人照片 |
-| `assets/certificate.jpg` | 历史证书文件；不包含在网站发布目录中，公开仓库历史仍可能留存 |
+| 证书原图 | 已从当前源码与网站撤下；公开仓库历史与缓存仍可能留存 |
 | `assets/unilifesim.jpg` | 真实游戏截图 |
 | `assets/portfolio-preview.jpg` | 本次首页预览 |
 | `assets/favicon.svg` | 文字印章站点图标 |
