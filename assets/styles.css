@@ -36,3 +36,31 @@
 .ledger-display-note>span{color:var(--accent);font-size:20px;line-height:1}
 [data-theme="dark"] .ledger-showcase{background:#273541;border-color:#465561;color:#c5d2dd}
 @media(max-width:760px){.ledger-showcase{padding:20px}.ledger-phone{max-width:250px}.ledger-cover-caption{font-size:9px}.ledger-display-note{line-height:1.7}}
+
+/* About: open typography instead of boxed hobby labels. */
+#about .about-grid{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(32px,6vw,80px);align-items:start}
+#about .about-story{min-width:0;max-width:560px}
+#about .about-intro{font-size:clamp(25px,2.6vw,34px);line-height:1.6;margin-bottom:24px}
+#about .about-interests{margin-top:30px;padding-top:22px;border-top:1px solid var(--line)}
+#about .about-interests h3{font-size:12px;color:var(--muted);font-weight:500;letter-spacing:.12em}
+#about .about-interests ul{display:flex;flex-wrap:wrap;gap:10px 24px;list-style:none;padding:0;margin:14px 0}
+#about .about-interests li{font-size:15px;display:flex;align-items:center;gap:9px}
+#about .about-interests li:before{content:"";width:4px;height:4px;flex:none;border-radius:50%;background:var(--accent)}
+#about .about-interests .about-text{font-size:14px}
+#about .about-facts{margin:0;min-width:0}
+#about .about-facts>div{padding:0 0 28px;border-bottom:1px solid var(--line)}
+#about .about-facts>div+div{padding-top:28px;border-bottom:0}
+#about .about-facts dt{display:flex;justify-content:space-between;gap:16px;font-size:12px;color:var(--accent);margin-bottom:14px;letter-spacing:.08em}
+#about .about-facts dt span{font-family:var(--serif);color:var(--muted)}
+#about .about-facts dd{margin:0}
+#about .about-facts h3{font:600 21px/1.6 var(--serif);margin-bottom:8px;overflow-wrap:anywhere}
+#about .about-facts p{font-size:14px;color:var(--muted);line-height:1.9}
+#about .about-facts .about-meta{font-size:12px;margin-top:5px}
+#about .about-facts .text-link{font-size:12px;margin-top:10px}
+section[tabindex="-1"]:focus{outline:none}
+@media(max-width:760px){
+ #about .about-grid{grid-template-columns:minmax(0,1fr);gap:32px}
+ #about .about-facts{padding-top:24px;border-top:1px solid var(--line)}
+ .method-list li>:not(.method-step){grid-column:2}
+ .method-list .method-step{grid-column:1;grid-row:1/5}
+}

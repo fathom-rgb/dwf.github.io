@@ -11,7 +11,7 @@ for (const file of ['index.html', 'resume.html']) {
   for (const [, value] of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
     if (/^(https?:|mailto:|data:)/.test(value)) continue;
     if (value.startsWith('#')) assert(ids.includes(value.slice(1)), `${file}: broken anchor ${value}`);
-    else assert(fs.existsSync(path.join(path.dirname(file), value.split('#')[0])), `${file}: missing ${value}`);
+    else assert(fs.existsSync(path.join(path.dirname(file), value.split(/[?#]/)[0])), `${file}: missing ${value}`);
   }
   for (const [, attrs, code] of html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/g)) {
     if (attrs.includes('ld+json')) JSON.parse(code);
