@@ -11,7 +11,7 @@
     })();
   </script>
   <title>戴文凡 · 文学 × AI 创作 | 个人作品集</title>
-  <meta name="description" content="戴文凡，江南大学汉语言文学本科在读。从文字出发，探索交互叙事与 AI 辅助创作。查看大学文字模拟器 UniLifeSim、个人网站与创作笔记。">
+  <meta name="description" content="戴文凡，江南大学汉语言文学本科在读。从文字出发，探索交互叙事与 AI 辅助创作。查看大学文字模拟器 UniLifeSim、文学人物图谱、小账本与创作笔记。">
   <meta name="author" content="戴文凡">
   <meta name="theme-color" content="#f7f5ef">
   <link rel="canonical" href="https://fathom-rgb.github.io/dwf.github.io/">
@@ -65,9 +65,44 @@
       <div class="hero-foot"><p><span class="status-dot" aria-hidden="true"></span>在无锡，阅读、写作，也动手创造。</p><a href="#projects">向下翻阅 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v17m-5-5 5 5 5-5"/></svg></a></div>
     </section>
     <section class="section wrap" id="projects" aria-labelledby="projectsTitle" tabindex="-1">
-      <header class="section-head"><div><p class="eyebrow section-label"><span class="number">01</span>SELECTED WORK</p><h2 id="projectsTitle">想法的具体形状<span class="accent">。</span></h2></div><p class="section-note">先体验作品，再阅读设计与实现笔记。</p></header>
+      <header class="section-head"><div><p class="eyebrow section-label"><span class="number">01</span>SELECTED WORK</p><h2 id="projectsTitle">想法的具体形状<span class="accent">。</span></h2></div><p class="section-note">浏览交互作品与应用实践，再阅读设计与实现笔记。</p></header>
       <article class="project" id="characters" aria-labelledby="charactersTitle">
         <div class="project-grid"><div class="website-visual"><div><span class="website-cover-label">LITERARY CHARACTER ATLAS</span><strong>人物之间，<br>故事展开。</strong><p class="website-cover-footer">阅读 / 关系 / 笔记</p></div><span class="website-monogram" aria-hidden="true">读</span></div><div class="project-copy"><span class="project-tag">文学阅读 / 交互工具</span><h3 id="charactersTitle">人物之间 · 文学关系图谱</h3><p class="project-description">从一个人物出发，梳理亲属、婚姻与交往关系。以内置《红楼梦》第三回选读为起点，也可以整理自己的阅读笔记与人物图谱。</p><ul class="project-facts"><li>人物搜索</li><li>关系筛选</li><li>自定义图谱</li></ul><div class="project-links"><a class="button" href="characters/">打开人物图谱 <span aria-hidden="true">↗</span></a></div></div></div>
+      </article>
+      <article class="project" id="pocket-ledger" data-category="app" aria-labelledby="ledgerTitle">
+        <div class="project-grid">
+          <figure class="ledger-showcase">
+            <div class="ledger-cover-heading"><span>POCKET LEDGER / 日常有数</span><span>ANDROID</span></div>
+            <div class="ledger-phone" role="img" aria-label="小账本示意界面：九月收入100元，支出42元，结余58元；吃饭12元、洗澡3元、购物27元。全部为虚构数据。">
+              <div aria-hidden="true">
+                <div class="ledger-phone-head"><strong>小账本</strong><span>离线记账</span></div>
+                <div class="ledger-period">2026 年 9 月 <span>月度汇总</span></div>
+                <div class="ledger-balance"><span>本月结余</span><strong><small>¥</small>58.00</strong></div>
+                <div class="ledger-totals"><span>收入 <b>100.00</b></span><span>支出 <b>42.00</b></span></div>
+                <div class="ledger-record"><span><i>饭</i>吃饭</span><b>−12.00</b></div>
+                <div class="ledger-record"><span><i>浴</i>洗澡</span><b>−3.00</b></div>
+                <div class="ledger-record"><span><i>物</i>购物</span><b>−27.00</b></div>
+                <div class="ledger-phone-foot">把每一笔，记清楚。</div>
+              </div>
+            </div>
+            <figcaption class="ledger-cover-caption">示意界面 · 虚构数据<span>个人应用 / 2026</span></figcaption>
+          </figure>
+          <div class="project-copy">
+            <span class="project-tag">生活工具 / Android 应用</span>
+            <h3 id="ledgerTitle">小账本 · 把日常开销记清楚</h3>
+            <p class="project-en">Pocket Ledger</p>
+            <p class="project-description">从大学生活中的一顿饭、一次洗澡开始，把零散开销整理成看得懂的收支记录。围绕自己的使用需求，与 AI 一起完成离线记账、分类选择与月年汇总，再根据手机上的实际反馈持续修改。</p>
+            <ul class="project-facts"><li>12 个支出类别</li><li>月度 / 年度汇总</li><li>本机保存与备份</li></ul>
+            <p class="ledger-display-note"><span aria-hidden="true">◌</span> 个人成果展示 · 暂不提供安装包下载</p>
+          </div>
+        </div>
+        <details class="project-note"><summary>作品笔记：从一个生活需求，到手机里的工具</summary>
+          <div class="note-grid">
+            <div><h4>01 / 从日常问题出发</h4><p>想知道钱花在了哪里，先让记录变得简单。把吃饭、洗澡、洗衣、购物等校园生活场景变成可点选的类别，支持金额、日期、备注，以及后续修改。</p></div>
+            <div><h4>02 / 让记录可以回看</h4><p>按月、按年查看收入、支出与结余，用分类占比帮助回顾开销。应用无需登录或联网，账目保存在本机，并支持导出备份、合并恢复。</p></div>
+            <div><h4>03 / 在使用中继续打磨</h4><p>我提出需求并反馈手机上的问题，AI 协助开发与排查。迭代包括支出类别扩充和记账弹窗定位修复；后续继续检查不同屏幕、键盘弹出时的使用体验。</p></div>
+          </div>
+        </details>
       </article>
       <article class="project" id="unilifesim" data-category="story" aria-labelledby="gameTitle">
         <div class="project-grid">
