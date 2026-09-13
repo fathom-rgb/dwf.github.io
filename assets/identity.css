@@ -8,25 +8,48 @@
   background: #f7f5ef;
 }
 
-.portrait-companion {
-  position: absolute;
-  left: -48px;
-  bottom: 25px;
-  width: 128px;
-  padding: 3px;
-  border: 1px solid var(--line);
-  border-radius: 50%;
-  background: #f7f5ef;
-  box-shadow: 0 8px 22px #18253818;
-  transform: rotate(-6deg);
-  pointer-events: none;
+.identity-portrait {
+  display: grid;
+  justify-items: center;
+  justify-self: center;
+  gap: 18px;
+  width: min(100%, 330px);
+  margin: 0;
 }
 
-.portrait-companion img {
+.identity-portrait img {
   display: block;
   width: 100%;
   height: auto;
-  border-radius: inherit;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #f7f5ef;
+}
+
+.identity-portrait figcaption {
+  text-align: center;
+  font-family: var(--serif);
+  font-size: 18px;
+  letter-spacing: .12em;
+}
+
+.identity-portrait figcaption span {
+  display: block;
+  margin-top: 6px;
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: .15em;
+  color: var(--muted);
+}
+
+.resume-mark {
+  display: block;
+  width: 95px;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #f7f5ef;
 }
 
 [data-theme="dark"] .brand-mark {
@@ -40,10 +63,15 @@
     flex-basis: 36px;
   }
 
-  .portrait-companion {
-    left: -52px;
-    bottom: 15px;
-    width: 94px;
-    padding: 2px;
+  .identity-portrait {
+    width: min(100%, 230px);
+    gap: 12px;
+  }
+}
+
+@media print {
+  .resume-mark {
+    width: 22mm;
+    height: 22mm;
   }
 }
