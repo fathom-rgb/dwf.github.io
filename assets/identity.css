@@ -1,0 +1,49 @@
+/* Approved personal identity: the two-fish mark and the 06-A reading companion. */
+.brand-mark {
+  display: block;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  border-radius: 50%;
+  background: #f7f5ef;
+}
+
+.portrait-companion {
+  position: absolute;
+  left: -48px;
+  bottom: 25px;
+  width: 128px;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: #f7f5ef;
+  box-shadow: 0 8px 22px #18253818;
+  transform: rotate(-6deg);
+  pointer-events: none;
+}
+
+.portrait-companion img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: inherit;
+}
+
+[data-theme="dark"] .brand-mark {
+  box-shadow: 0 0 0 1px var(--line);
+}
+
+@media (max-width: 760px) {
+  .brand-mark {
+    width: 36px;
+    height: 36px;
+    flex-basis: 36px;
+  }
+
+  .portrait-companion {
+    left: -52px;
+    bottom: 15px;
+    width: 94px;
+    padding: 2px;
+  }
+}

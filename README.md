@@ -16,6 +16,8 @@
 
 采用纸白、墨色和朱砂红配色，以书刊式标题、留白、照片与真实项目画面建立视觉层次。深色主题使用墨绿背景与暖色重点。移除粒子、打字机和技能进度条，让内容直接可见。
 
+个人主标识采用深靛蓝与陶朱红的双鱼图案：双眼为圆形，右侧轮廓保持流畅，用于页头与浏览器图标。06-A 抱书小法师作为首页照片旁的辅助形象。两款图案均依据本人选定的方案制作，位于 `assets/identity/`；网页使用压缩后的图片，并为小尺寸图标单独导出 PNG。
+
 ## 文件与运行
 
 生产页面使用原生 HTML、CSS、JavaScript，无生产依赖，也不依赖外部字体或图标 CDN。`npm run build` 先检查页面再生成 `dist/`，仅将公开资源发布到 GitHub Pages。
@@ -29,7 +31,7 @@
 | 证书原图 | 已从当前源码与网站撤下；公开仓库历史与缓存仍可能留存 |
 | `assets/unilifesim.jpg` | 真实游戏截图 |
 | `assets/portfolio-preview.jpg` | 本次首页预览 |
-| `assets/favicon.svg` | 文字印章站点图标 |
+| `assets/identity/`、`assets/identity.css` | 双鱼主标识、抱书小法师、浏览器图标与对应样式 |
 | `scripts/serve.cjs` | 使用 Node 内置模块的开发服务器 |
 | `sitemap.xml`、`robots.txt` | 索引说明 |
 | `.github/workflows/pages.yml` | GitHub Pages 自动发布 |
