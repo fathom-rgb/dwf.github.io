@@ -6,9 +6,6 @@
 .hero h1 > span { padding-bottom: .1em; }
 .hero-intro { max-width: 540px; }
 .hero-foot { border-top: 1px solid var(--line); padding-top: 24px; margin-top: 54px; }
-.portrait-stage { perspective: 1000px; }
-.portrait-paper { transform: rotate(3deg) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)); transition: transform .65s var(--ease-out), box-shadow .65s var(--ease-out); }
-.portrait-paper img { filter: saturate(.9); }
 .masthead { background: var(--paper); }
 @supports (backdrop-filter: blur(16px)) { .masthead { background: color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter: blur(16px); } }
 .desktop-nav a { position: relative; }
@@ -37,7 +34,6 @@
   .resume-link:hover { transform: translateY(-2px); }
   .resume-link:hover .resume-arrow { transform: translate(2px, -1px); }
   .project-visual:hover, .website-visual:hover { transform: translateY(-5px); box-shadow: 0 22px 45px #17271c18; border-color: var(--accent); }
-  .portrait-stage:hover .portrait-paper { box-shadow: 0 28px 65px #17271c28; }
 }
 @media (prefers-reduced-motion: no-preference) {
   .resume-link:active { transform: translateY(1px); }
@@ -55,6 +51,22 @@
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *:before, *:after { animation: none !important; transition: none !important; }
-  .portrait-paper { transform: rotate(3deg) !important; }
 }
 @media print { .hero:before { display: none; } }
+
+/* Reading companion and quiet wayfinding. */
+.scholar-button { display: block; width: 100%; padding: 0; border: 0; border-radius: 50%; background: transparent; color: inherit; cursor: pointer; touch-action: manipulation; }
+.scholar-button:disabled { cursor: default; }
+.scholar-button:focus-visible { outline: 2px solid var(--accent); outline-offset: 8px; }
+.scholar-button img { transition: transform .35s var(--ease-out); }
+.reading-progress { position: absolute; bottom: -1px; left: 0; width: 100%; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; pointer-events: none; }
+.desktop-nav a[aria-current="location"], .mobile-nav a[aria-current="location"] { color: var(--accent); }
+.desktop-nav a[aria-current="location"]:after { transform: scaleX(1); }
+.mobile-nav a[aria-current="location"] { border-bottom-color: var(--accent); }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .scholar-button:not(:disabled):hover img { transform: rotate(-2deg) translateY(-3px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scholar-button img { transition: none; }
+}
+@media print { .reading-progress { display: none; } }
