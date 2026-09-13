@@ -24,7 +24,8 @@
       // Native dialogs provide keyboard focus containment and Escape dismissal.
       const menu = document.getElementById('mobileMenu');
       const menuButton = document.getElementById('menuToggle');
-      function syncScrollLock() { document.body.style.overflow = menu.open ? 'hidden' : ''; }
+      const certificate = document.getElementById('certificateViewer');
+      function syncScrollLock() { document.body.style.overflow = (menu.open || certificate?.open) ? 'hidden' : ''; }
       function closeMenu() { if (menu.open) { menu.close(); menuButton.setAttribute('aria-expanded', 'false'); syncScrollLock(); } }
       menuButton.addEventListener('click', () => { menu.showModal(); menuButton.setAttribute('aria-expanded', 'true'); syncScrollLock(); });
       menu.querySelector('[data-close-menu]').addEventListener('click', closeMenu);
@@ -43,6 +44,22 @@
         if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.close();
       }));
 
+      const certificateOpen = document.getElementById('certificateOpen');
+      if (certificate && typeof certificate.showModal === 'function' && certificateOpen) {
+        certificateOpen.setAttribute('aria-haspopup', 'dialog');
+        certificateOpen.setAttribute('aria-controls', 'certificateViewer');
+        certificateOpen.addEventListener('click', event => {
+          if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+          event.preventDefault(); certificate.showModal(); syncScrollLock();
+        });
+        document.getElementById('certificateClose').addEventListener('click', () => certificate.close());
+        certificate.addEventListener('close', syncScrollLock);
+        certificate.addEventListener('click', event => {
+          if (event.target !== certificate) return;
+          const box = certificate.getBoundingClientRect();
+          if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) certificate.close();
+        });
+      }
       const status = document.getElementById('copyStatus');
       let toastTimer;
       function announce(message) {
@@ -71,3 +88,4 @@
         announce(copied ? `${button.dataset.label}已复制` : `请长按或选中文字复制：${button.dataset.copy}`);
       }));
     })();
+

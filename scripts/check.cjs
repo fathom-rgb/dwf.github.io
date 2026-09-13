@@ -5,7 +5,7 @@ const vm = require('node:vm');
 for (const file of ['index.html', 'resume.html']) {
   const html = fs.readFileSync(file, 'utf8');
   assert(html.includes('lang="zh-CN"'), `${file}: language missing`);
-  assert(!/tel:|www_dwf_com|18258279827|certificate\.jpg|data-filter/.test(html), `${file}: retired public content`);
+  assert(!/tel:|www_dwf_com|18258279827|data-filter/.test(html), `${file}: retired public content`);
   const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]);
   assert.equal(ids.length, new Set(ids).size, `${file}: duplicate IDs`);
   for (const [, value] of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
