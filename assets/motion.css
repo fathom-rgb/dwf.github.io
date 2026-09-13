@@ -27,14 +27,20 @@
 .button:hover:before, .button:focus-visible:before { transform: translateX(120%); }
 .text-link > span[aria-hidden], .button > span[aria-hidden] { transition: transform .35s var(--ease-out); }
 .text-link:hover > span[aria-hidden], .button:hover > span[aria-hidden] { transform: translate(3px, -2px); }
+.resume-link, .resume-arrow { transition: transform .18s var(--ease-out); }
 .contact-list { background: var(--surface); padding: 26px; border: 1px solid var(--line); box-shadow: 8px 8px 0 var(--paper); }
 .contact-row { grid-template-columns: 1fr auto; gap: 12px; border-bottom: 0; }
 .contact-row dt { grid-column: 1 / -1; font-size: 12px; letter-spacing: .12em; }
 .contact-row dd { font-size: clamp(14px, 1.5vw, 18px); }
 .copy { font-size: 12px; min-height: 44px; }
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .resume-link:hover { transform: translateY(-2px); }
+  .resume-link:hover .resume-arrow { transform: translate(2px, -1px); }
   .project-visual:hover, .website-visual:hover { transform: translateY(-5px); box-shadow: 0 22px 45px #17271c18; border-color: var(--accent); }
   .portrait-stage:hover .portrait-paper { box-shadow: 0 28px 65px #17271c28; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .resume-link:active { transform: translateY(1px); }
 }
 @media (max-width: 760px) {
   .hero h1 { font-size: clamp(36px, 8.7vw, 59px); }
