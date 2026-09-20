@@ -23,3 +23,5 @@ new vm.Script(fs.readFileSync('assets/site.js', 'utf8'));
 new vm.Script(fs.readFileSync('assets/motion.js', 'utf8'));
 new vm.Script(fs.readFileSync('characters/app.js', 'utf8'));
 console.log('PASS: local links, anchors, unique IDs, image alternatives, privacy checks, JSON-LD and JavaScript syntax');
+
+new vm.Script(fs.readFileSync('assets/spatial.js', 'utf8'));

@@ -1,0 +1,66 @@
+/* A small reading desk: existing cinnabar identity, real CSS 3D book geometry. */
+.masthead-inner{min-height:76px}
+.hero{padding:64px 0 40px}
+.hero:before{display:none}
+.hero-main{grid-template-columns:1.15fr 1fr;gap:48px}
+.hero h1{font-size:clamp(38px,4.6vw,64px);letter-spacing:-.035em;line-height:1.4}
+.hero h1 .accent:after{display:none}
+.hero-intro{max-width:33em;line-height:1.95;margin:25px 0 28px}
+.hero-foot{margin-top:32px}
+.hero-foot a{display:none}
+.spatial-desk{position:relative;min-width:0;height:420px;display:grid;place-items:center;perspective:1100px;isolation:isolate}
+.spatial-desk:before{content:'';position:absolute;width:340px;height:340px;border-radius:50%;background:var(--tint);z-index:-1}
+.book-shadow{position:absolute;width:240px;height:65px;background:#292d2824;border-radius:50%;filter:blur(18px);bottom:47px;transform:rotate(-12deg)}
+.book-position{width:220px;height:286px;transform-style:preserve-3d;transform:rotateX(12deg) rotateY(-24deg) rotateZ(-9deg);transition:transform .7s cubic-bezier(.22,1,.36,1)}
+.book-object{position:relative;width:100%;height:100%;transform-style:preserve-3d}
+.book-back,.book-paper,.book-cover{position:absolute;inset:0;border-radius:3px 9px 9px 3px}
+.book-back{background:#742f24;transform:translateZ(-22px);box-shadow:8px 12px 0 #292d280c}
+.book-paper{inset:5px 3px 5px 6px;background:#ede7d9;transform:translateZ(-11px);border-right:3px double #bbb3a3}
+.book-edge{position:absolute;right:0;top:6px;width:22px;height:274px;background:linear-gradient(90deg,#c9c1b1,#fff9eb);transform-origin:right;transform:rotateY(-90deg);border-block:1px solid #c4baa5}
+.book-bottom{position:absolute;bottom:0;left:4px;width:212px;height:22px;background:#e1d9c9;transform-origin:bottom;transform:rotateX(90deg)}
+.book-inside{position:absolute;inset:7px;background:#fffaf0;color:#433c32;transform:translateZ(-1px);padding:31px 20px;font:17px/1.9 var(--serif)}
+.book-inside small{display:block;font:10px/1.5 var(--sans);color:#75695a;margin-bottom:24px}
+.book-inside p+p{margin-top:15px;font-size:12px}
+.book-cover{transform-origin:left;transform:translateZ(2px);transition:transform 1s cubic-bezier(.22,1,.36,1);background:#a33d2e;color:#fff7e9;padding:25px 26px;backface-visibility:hidden;box-shadow:inset 6px 0 9px #4c1b2428,inset -1px 0 #fff4;display:flex;flex-direction:column}
+.book-cover:before{content:'';position:absolute;inset:12px;border:1px solid #f5e7d04a;pointer-events:none}
+.book-cover small{font:10px/1.6 var(--sans);letter-spacing:.13em;color:#f5dfcf}
+.book-cover strong{font:46px/1.32 var(--serif);font-weight:500;margin-top:27px;letter-spacing:.06em}
+.book-cover>span{font:12px/1.7 var(--sans);margin-top:auto;letter-spacing:.12em}
+.book-open .book-cover{transform:translateZ(2px) rotateY(-132deg)}
+.book-open .book-position{transform:translateX(35px) rotateX(7deg) rotateY(-12deg) rotateZ(-3deg)}
+.desk-companion{position:absolute;right:0;bottom:28px;width:123px!important;gap:5px!important}
+.desk-companion img{box-shadow:0 4px 0 var(--line)}
+.desk-companion figcaption{font-size:12px;letter-spacing:.06em}
+.desk-companion figcaption span{display:none}
+.book-control{position:absolute;bottom:0;left:50%;transform:translateX(-50%);white-space:nowrap;background:transparent;min-height:44px;padding:8px 14px;font-size:12px;letter-spacing:.04em;color:var(--muted);border-bottom:1px solid var(--line)}
+.book-control:hover{color:var(--accent);border-color:var(--accent)}
+.book-control:disabled{display:none}
+.section{padding-block:72px}
+.section-head{display:block;margin-bottom:36px}
+.section-head .section-note{margin-top:16px;max-width:50em}
+.section-label{display:none}
+.section h2{font-size:clamp(29px,3.1vw,42px);letter-spacing:-.02em;text-wrap:balance}
+.method-section{background:transparent}
+.method-list{gap:36px}
+.method-list li{background:transparent;padding:24px 0;border-top:1px solid var(--line);border-bottom:0}
+.method-step{font-size:22px;color:var(--accent)}
+.method-list h3{font-size:23px}
+.method-list p{max-width:38ch}
+.method-foot{background:var(--tint);padding:28px 32px;border:0;border-radius:8px}
+.project{padding-bottom:48px;margin-bottom:48px}
+.project-tag{border:0;padding:0;color:var(--accent);font-size:13px}
+.project-description{line-height:1.95;max-width:42ch}
+.project-visual,.website-visual{box-shadow:none!important}
+.project-visual{background:var(--tint);border:0}
+.project:nth-of-type(even) .project-grid{grid-template-columns:1fr 1.2fr}
+.project:nth-of-type(even) .project-grid>.project-copy{order:-1}
+.button,.button:hover{box-shadow:none}
+.contact-list{box-shadow:none;border:0;border-radius:8px}
+.contact-section{background:var(--tint);padding-block:64px}
+.contact-section .section-note{margin-block:20px}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){.spatial-desk:not(.book-open):hover .book-position{transform:rotateX(8deg) rotateY(-12deg) rotateZ(-5deg)}}
+@media(min-width:1600px){.hero{padding-top:72px}}
+@media(max-width:1050px){.hero-main{gap:24px}.spatial-desk{height:380px}.book-position{width:190px;height:250px}.book-edge{height:238px}.book-bottom{width:182px}.book-cover strong{font-size:39px}.desk-companion{width:100px!important;right:-4px}.spatial-desk:before{width:290px;height:290px}.book-open .book-position{transform:translateX(28px) rotateX(7deg) rotateY(-12deg) rotateZ(-3deg)}}
+@media(max-width:760px){.hero{padding-top:38px}.hero-main{grid-template-columns:1fr;gap:12px}.hero h1{font-size:clamp(35px,8.6vw,57px);letter-spacing:-.03em}.hero-intro{font-size:15px;max-width:34em}.spatial-desk{height:345px;width:min(100%,400px);margin-inline:auto}.desk-companion{right:6px;bottom:28px}.book-position{width:180px;height:236px}.book-edge{height:224px}.book-bottom{width:172px}.book-cover{padding:23px}.book-cover strong{font-size:36px;margin-top:21px}.book-inside{padding:22px 15px;font-size:16px}.book-inside small{margin-bottom:16px}.spatial-desk:before{width:270px;height:270px}.hero-foot{margin-top:26px}.section{padding-block:44px}.method-list{gap:24px}.method-list li{display:block}.method-step{display:block;margin:0 0 12px}.method-list h3{font-size:22px}.method-foot{padding:22px}.project:nth-of-type(even) .project-grid{grid-template-columns:1fr}.project:nth-of-type(even) .project-grid>.project-copy{order:initial}.project{padding-bottom:32px;margin-bottom:32px}.contact-section{padding-block:44px}}
+@media(prefers-reduced-motion:reduce){.book-position,.book-cover{transition:none}}
+@media print{.spatial-desk{display:none}.hero-main{display:block}}
