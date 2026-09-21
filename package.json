@@ -1,1 +1,1 @@
-{"name":"dai-wenfan-portfolio","private":true,"scripts":{"dev":"node scripts/serve.cjs","check":"node scripts/check.cjs","build":"node scripts/build.cjs"}}
+{"name":"dai-wenfan-portfolio","private":true,"scripts":{"generate":"node scripts/products.cjs","dev":"npm run generate && node scripts/serve.cjs","check":"node scripts/check.cjs","test":"node scripts/test-products.cjs","build":"node scripts/build.cjs"}}

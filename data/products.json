@@ -1,0 +1,84 @@
+[
+  {
+    "id": "characters",
+    "name": "人物之间",
+    "subtitle": "文学关系图谱",
+    "description": "把书中复杂的人物关系，整理成一张可以探索的阅读地图。",
+    "category": "阅读工具",
+    "status": "在线体验",
+    "featured": true,
+    "image": "assets/products/characters.png",
+    "imageAlt": "人物之间实际界面：红楼梦人物关系网络、人物列表与阅读笔记",
+    "imageWidth": 1440,
+    "imageHeight": 900,
+    "href": "characters/",
+    "action": "打开人物图谱",
+    "features": ["人物搜索", "关系筛选", "自定义图谱"],
+    "notes": [
+      {"title": "从阅读出发", "text": "以内置《红楼梦》第三回选读为起点，梳理亲属、婚姻与交往关系，也可以整理自己的阅读笔记。"},
+      {"title": "把线索留住", "text": "支持新建人物、编辑关系、导入和导出图谱。自定义数据保存在当前浏览器。"}
+    ]
+  },
+  {
+    "id": "unilifesim",
+    "name": "大学文字模拟器",
+    "subtitle": "UniLifeSim",
+    "description": "如果大学四年可以重新选择？让每一次决定，写下不同的故事。",
+    "category": "互动叙事",
+    "status": "在线体验",
+    "featured": true,
+    "image": "assets/unilifesim.jpg",
+    "imageAlt": "大学文字模拟器实机截图：角色属性、开学报到故事与四个选项",
+    "imageWidth": 1161,
+    "imageHeight": 635,
+    "href": "https://fathom-rgb.github.io/-/",
+    "action": "开始大学生活",
+    "source": "https://github.com/fathom-rgb/-",
+    "features": ["8 个学期", "20 种结局", "浏览器内存档"],
+    "notes": [
+      {"title": "让文字可以参与", "text": "用校园生活中的具体选择推动叙事，把学习、关系和未来方向放在同一个故事里。"},
+      {"title": "内容与规则分开", "text": "事件与结局写在独立数据文件中；JavaScript 引擎处理属性和分支，界面负责呈现文字与选项。"},
+      {"title": "继续打磨", "text": "已包含角色创建、8 学期进程、20 个结局和本地存档。接下来根据试玩反馈打磨事件节奏与选择差异，欢迎来信反馈。"}
+    ]
+  },
+  {
+    "id": "pocket-ledger",
+    "name": "小账本",
+    "subtitle": "Pocket Ledger · Android",
+    "description": "把日常的零散开销，整理成看得懂的收支记录。",
+    "category": "生活工具",
+    "status": "作品展示",
+    "featured": false,
+    "mark": "记",
+    "href": "#pocket-ledger-notes",
+    "action": "了解作品",
+    "features": ["12 个支出类别", "月度 / 年度汇总", "本机保存与备份"],
+    "notice": "个人成果展示，暂不提供安装包下载。",
+    "notes": [
+      {"title": "从日常问题出发", "text": "把吃饭、洗澡、洗衣、购物等校园生活场景变成可点选的类别，支持金额、日期、备注与后续修改。"},
+      {"title": "让记录可以回看", "text": "按月、按年查看收入、支出与结余，用分类占比回顾开销。应用无需登录或联网，账目保存在本机，并支持导出备份、合并恢复。"},
+      {"title": "在使用中打磨", "text": "我提出需求并反馈手机上的问题，AI 协助开发与排查。迭代包括支出类别扩充和记账弹窗定位修复。"}
+    ]
+  },
+  {
+    "id": "portfolio",
+    "name": "个人网站",
+    "subtitle": "Dai Wenfan · Portfolio",
+    "description": "一处持续生长的个人空间，让作品被看见，也让交流发生。",
+    "category": "网页产品",
+    "status": "在线浏览",
+    "featured": false,
+    "image": "assets/identity/fish.webp",
+    "imageAlt": "戴文凡的双鱼个人标识",
+    "imageWidth": 384,
+    "imageHeight": 384,
+    "href": "#top",
+    "action": "浏览主页",
+    "source": "https://github.com/fathom-rgb/dwf.github.io",
+    "features": ["精选与完整目录", "深浅主题", "可打印简历"],
+    "notes": [
+      {"title": "从个人介绍到产品入口", "text": "以文学 × AI 创作为定位，展示真实产品、创作方法与个人经历。精选代表作，同时让其他作品保持可见。"},
+      {"title": "与 AI 协作", "text": "我提出定位与视觉需求，AI 协助整理页面、编写交互并验证。作品由统一数据生成静态内容，便于持续更新。"}
+    ]
+  }
+]

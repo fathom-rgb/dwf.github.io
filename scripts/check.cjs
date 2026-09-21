@@ -5,7 +5,7 @@ const vm = require('node:vm');
 for (const file of ['index.html', 'resume.html']) {
   const html = fs.readFileSync(file, 'utf8');
   assert(html.includes('lang="zh-CN"'), `${file}: language missing`);
-  assert(!/tel:|www_dwf_com|18258279827|data-filter/.test(html), `${file}: retired public content`);
+  assert(!/tel:|www_dwf_com|18258279827/.test(html), `${file}: retired public content`);
   const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]);
   assert.equal(ids.length, new Set(ids).size, `${file}: duplicate IDs`);
   for (const [, value] of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
@@ -20,8 +20,9 @@ for (const file of ['index.html', 'resume.html']) {
   for (const match of html.matchAll(/<img\b[^>]*>/g)) assert(/alt="[^"]*"/.test(match[0]), `${file}: missing alt`);
 }
 new vm.Script(fs.readFileSync('assets/site.js', 'utf8'));
-new vm.Script(fs.readFileSync('assets/motion.js', 'utf8'));
+for (const file of ['assets/catalog.js', 'assets/home-motion.js']) new vm.Script(fs.readFileSync(file, 'utf8'));
 new vm.Script(fs.readFileSync('characters/app.js', 'utf8'));
 console.log('PASS: local links, anchors, unique IDs, image alternatives, privacy checks, JSON-LD and JavaScript syntax');
 
-new vm.Script(fs.readFileSync('assets/spatial.js', 'utf8'));
+const {renderPage} = require('./products.cjs');
+assert.equal(fs.readFileSync('index.html', 'utf8'), renderPage(JSON.parse(fs.readFileSync('data/products.json', 'utf8'))), 'Run npm run generate to sync the static homepage');
