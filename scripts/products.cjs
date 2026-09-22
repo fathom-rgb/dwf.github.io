@@ -34,16 +34,8 @@ function notes(p) {
 }
 function renderProducts(products) {
   validate(products);
-  const featured = products.filter(p => p.featured).slice(0, 3);
   const categories = [...new Set(products.map(p => p.category))];
-  return `<section class="section wrap products-section" id="projects" aria-labelledby="projectsTitle" tabindex="-1">
-  <header class="products-heading"><h2 id="projectsTitle">正在重点做<span class="accent">。</span></h2><a class="text-link directory-jump" href="#all-products">全部作品 <span class="count">${products.length}</span> <span aria-hidden="true">↓</span></a></header>
-  <div class="featured-products" data-count="${featured.length}">${featured.map(p => `<article class="featured-product" aria-labelledby="featured-${p.id}">
-    <a class="featured-visual" href="${escape(p.href)}" aria-label="${escape(p.action)}${p.href.startsWith('https://') ? '（新标签页）' : ''}"${p.href.startsWith('https://') ? ' target="_blank" rel="noopener noreferrer"' : ''}>${img(p, 'product-screenshot', true)}</a>
-    <div class="product-meta"><span>${escape(p.category)}</span><span class="product-status">${escape(p.status)}</span></div>
-    <h3 id="featured-${p.id}">${escape(p.name)}</h3><p>${escape(p.description)}</p>
-    ${link(p.href, p.action, 'product-action')}
-  </article>`).join('\n')}</div>
+  return `<section class="section wrap products-section" id="projects" aria-labelledby="catalogTitle" tabindex="-1">
   <div class="catalog" id="all-products" tabindex="-1">
     <header class="catalog-heading"><h2 id="catalogTitle">全部作品</h2><p id="catalogCount" role="status" aria-live="polite" aria-atomic="true">共 ${products.length} 件作品</p></header>
     <div class="catalog-filters" role="group" aria-label="按作品类型筛选" hidden><button type="button" data-category-filter="all" aria-pressed="true" aria-controls="productList">全部 <span>${products.length}</span></button>${categories.map(c => `<button type="button" data-category-filter="${escape(c)}" aria-pressed="false" aria-controls="productList">${escape(c)} <span>${products.filter(p => p.category === c).length}</span></button>`).join('')}</div>

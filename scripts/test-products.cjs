@@ -5,7 +5,8 @@ const {renderProducts, renderConstellation, validate, root} = require('./product
 const products = JSON.parse(fs.readFileSync(path.join(root, 'data/products.json'), 'utf8'));
 const html = renderProducts(products);
 assert.equal((html.match(/class="catalog-product"/g) || []).length, products.length);
-assert.equal((html.match(/class="featured-product"/g) || []).length, Math.min(3, products.filter(p => p.featured).length));
+assert(!html.includes('class="featured-product"'));
+assert(!html.includes('正在重点做'));
 const mock = {id:'test-new-product', name:'新增产品 <测试>', description:'这是测试数据，不会发布。', category:'实验项目', status:'原型展示', href:'https://example.com/', action:'体验原型'};
 const expanded = renderProducts([...products, mock]);
 const stars = renderConstellation([...products, mock]);
@@ -17,7 +18,7 @@ assert(expanded.includes('data-category-filter="实验项目"'));
 assert(expanded.includes('新增产品 &lt;测试&gt;'));
 assert(!expanded.includes('id="featured-test-new-product"'));
 assert.equal((expanded.match(/class="catalog-product"/g) || []).length, products.length + 1);
-assert.equal((renderProducts(products.map(p => ({...p, featured: true, image:'assets/unilifesim.jpg', imageAlt:'测试', imageWidth:1161, imageHeight:635}))).match(/class="featured-product"/g) || []).length, 3);
+assert.equal((renderProducts(products.map(p => ({...p, featured: true, image:'assets/unilifesim.jpg', imageAlt:'测试', imageWidth:1161, imageHeight:635}))).match(/class="featured-product"/g) || []).length, 0);
 assert.throws(() => validate([...products, products[0]]), /重复/);
 assert.throws(() => validate([{...mock, href:'javascript:alert(1)'}]), /链接/);
 assert.throws(() => validate([{...mock, featured:true}]), /真实截图/);
