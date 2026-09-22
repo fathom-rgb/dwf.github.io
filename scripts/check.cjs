@@ -20,7 +20,7 @@ for (const file of ['index.html', 'resume.html']) {
   for (const match of html.matchAll(/<img\b[^>]*>/g)) assert(/alt="[^"]*"/.test(match[0]), `${file}: missing alt`);
 }
 new vm.Script(fs.readFileSync('assets/site.js', 'utf8'));
-for (const file of ['assets/catalog.js', 'assets/home-motion.js', 'assets/constellation.js']) new vm.Script(fs.readFileSync(file, 'utf8'));
+for (const file of ['assets/catalog.js', 'assets/home-motion.js', 'assets/editorial.js']) new vm.Script(fs.readFileSync(file, 'utf8'));
 new vm.Script(fs.readFileSync('characters/app.js', 'utf8'));
 console.log('PASS: local links, anchors, unique IDs, image alternatives, privacy checks, JSON-LD and JavaScript syntax');
 

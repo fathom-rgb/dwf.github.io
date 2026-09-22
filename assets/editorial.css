@@ -1,0 +1,46 @@
+/* Literary paper direction: the approved artwork sets the composition.
+   Native text/links stay separate from the image. Radius: 0 for surfaces,
+   round only for existing identity marks and icon buttons. */
+@font-face{font-family:"Literary Serif";src:url("fonts/literary-serif.woff2") format("woff2");font-weight:400 600;font-style:normal;font-display:swap}
+:root{--paper:#f5f2eb;--surface:#faf8f2;--ink:#202c36;--muted:#666961;--accent:#ac442f;--line:#d2d0c6;--tint:#ede9df;--soft-accent:#eddfd5;--serif:"Literary Serif","Noto Serif SC","Songti SC","STSong","SimSun",serif}
+:root[data-theme="dark"]{--paper:#172128;--surface:#1e2a32;--ink:#eee9df;--muted:#b6b7b0;--accent:#efa080;--line:#405059;--tint:#233039;--soft-accent:#3e302b}
+.masthead{border-bottom:0}.masthead-inner{min-height:80px}.brand-name{font-family:var(--serif);font-weight:600;font-size:21px}.brand-en{font-family:var(--serif);font-size:9px;letter-spacing:.17em}.brand-mark{width:48px;height:48px;flex-basis:48px;background:transparent}.desktop-nav a,.resume-link{font-family:var(--serif);font-size:15px}.resume-link{border:0;border-radius:0;padding-inline:8px}.theme-toggle{border-color:transparent}
+.literary-hero{padding:51px 0 25px;overflow:clip}
+.literary-hero .hero-copy{text-align:center;position:relative;z-index:1}
+.literary-hero h1{font:500 clamp(42px,6.1vw,92px)/1.4 var(--serif);letter-spacing:.015em;text-wrap:nowrap}
+.literary-hero h1>span{display:inline-block;vertical-align:top}.literary-hero h1 .hero-period{display:inline;margin-right:-.35em}
+.literary-hero .hero-description{max-width:none;margin:17px 0 21px;font:400 clamp(16px,1.5vw,21px)/1.9 var(--serif);color:var(--ink)}
+.literary-hero .button-row{justify-content:center;gap:34px}.literary-hero .text-link{font:400 17px/1.7 var(--serif);min-height:44px;border-bottom:1px solid var(--ink);gap:18px;padding:4px 0;text-decoration:none}.literary-hero .hero-primary{color:var(--accent);border-color:var(--accent)}
+.paper-art{width:min(1600px,100%);margin:-12px auto -7px;perspective:1100px;pointer-events:auto;background:var(--paper)}
+.paper-art picture{display:block;mix-blend-mode:multiply;transform:rotateX(var(--paper-x,0deg)) rotateY(var(--paper-y,0deg));transition:transform .6s var(--ease)}
+.paper-art img{display:block;width:100%;height:auto;mask-image:linear-gradient(to bottom,transparent,#000 9%,#000 85%,transparent);-webkit-mask-image:linear-gradient(to bottom,transparent,#000 9%,#000 85%,transparent)}
+[data-theme="dark"] .paper-art picture{mix-blend-mode:screen}
+[data-theme="dark"] .paper-art img{filter:invert(1) sepia(.15);opacity:.73}
+.hero-index{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:46px}
+.hero-index>a{display:block;text-decoration:none;min-width:0;padding:8px 0 0}
+.index-number{font:400 12px/1.6 var(--serif);color:var(--accent);display:block;margin-bottom:6px}
+.index-title{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:10px;border-bottom:1px solid var(--line);font:500 clamp(16px,1.4vw,21px)/1.8 var(--serif)}
+.index-title>span{font-family:var(--sans);font-size:20px;transition:transform .25s var(--ease)}
+.hero-index>a:hover .index-title{border-color:var(--accent);color:var(--accent)}.hero-index>a:hover .index-title>span{transform:translateX(4px)}
+.index-more{margin-top:20px}
+.hero-colophon{display:flex;justify-content:space-between;align-items:center;gap:24px;padding-top:22px}
+.hero-colophon>p{font:400 12px/1.8 var(--serif);color:var(--muted)}
+.literary-hero .identity-portrait{position:static;width:58px;gap:0}.scholar-button{border-radius:0}.scholar-button img{mix-blend-mode:multiply}[data-theme="dark"] .scholar-button img{mix-blend-mode:normal;border-radius:50%}
+.products-section{padding-top:38px}.catalog-heading h2{font-size:29px}.catalog-thumb{border-radius:0;width:100px;height:72px}.catalog-row{grid-template-columns:100px minmax(0,1fr) auto;gap:25px}.catalog-product{padding:25px 0}.catalog-title h3{font-family:var(--serif);font-size:21px;font-weight:500}.catalog-copy>p{font-size:15px}.catalog-category{font-size:12px}.product-notes{margin-left:125px}.catalog-action{font-size:14px;min-height:44px}.catalog-filters button{font-size:14px}.catalog-filters button[aria-pressed="true"]{font-weight:500}
+.service-lines{display:block;margin-top:30px}.service-lines>div{display:grid;grid-template-columns:1fr 1.8fr 1.1fr;gap:32px;padding:23px 0;align-items:baseline;border-bottom:1px solid var(--line)}.service-lines>div:last-child{border-bottom:0}.service-lines h3{font-family:var(--serif);font-weight:500;margin:0}.service-lines p{max-width:40em;font-size:15px}.service-lines>div>span,.service-lines .text-link{margin:0;font-size:12px}
+.section h2{font-weight:500}.contact-section{background:var(--paper)}.contact-section h2{font-weight:500}.copy{border-radius:0}.catalog-title,.about-heading{row-gap:8px}
+@media(min-width:1600px){.literary-hero{padding-top:60px}.literary-hero h1{font-size:96px}.paper-art{margin-top:-15px}}
+@media(max-width:1050px){.literary-hero{padding-top:40px}.hero-index{gap:24px}.paper-art{margin-top:7px}.catalog-row{gap:20px}.product-notes{margin-left:120px}.service-lines>div{grid-template-columns:1fr 2fr;gap:12px 25px}.service-lines>div>span,.service-lines .text-link{grid-column:2}}
+@media(max-width:760px){
+  .masthead-inner{flex-wrap:wrap;row-gap:0;padding-block:8px}.literary-hero .hero-copy{container-type:inline-size}
+  .masthead-inner{min-height:72px}.brand-mark{width:35px;height:35px;flex-basis:35px}.brand{gap:9px}.brand-name{font-size:17px}.brand-en{font-size:8px}.theme-toggle,.menu-toggle{width:44px;height:44px}.resume-link{font-size:14px;padding-inline:5px}.header-actions{gap:2px}.menu-toggle{border-color:transparent}
+  .literary-hero{padding:27px 0 24px}.literary-hero .hero-copy{text-align:left}.literary-hero h1{font-size:clamp(40px,10.9vw,68px);line-height:1.48;letter-spacing:.035em;text-wrap:wrap}.literary-hero h1>span{display:block}.hero-period{margin:0}.literary-hero .hero-description{font-size:16px;line-height:1.85;margin:14px 0 18px;max-width:27em}.literary-hero .hero-description>span{display:block}.literary-hero .button-row{justify-content:flex-start;gap:30px}.literary-hero .text-link{font-size:16px;min-height:44px}
+  .paper-art{width:100%;height:clamp(190px,48vw,290px);margin:14px auto 8px;overflow:clip;pointer-events:none}.paper-art picture{height:100%;transform:none!important}.paper-art img{width:100%;height:100%;object-fit:cover;object-position:49% center;mask-image:linear-gradient(to bottom,transparent,#000 12%,#000 82%,transparent);-webkit-mask-image:linear-gradient(to bottom,transparent,#000 12%,#000 82%,transparent)}
+  .hero-index{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 24px}.hero-index>a{min-height:64px;padding-top:4px}.index-number{font-size:11px;margin-bottom:3px}.index-title{font-size:clamp(14px,3.95vw,20px);gap:5px;padding-bottom:9px;line-height:1.9}.index-title>span{font-size:18px}.hero-colophon{padding-top:22px}.hero-colophon>p{font-size:11px}.literary-hero .identity-portrait{width:45px}
+  .catalog-heading h2{font-size:27px}.catalog-row{grid-template-columns:62px minmax(0,1fr);gap:10px 16px}.catalog-thumb{width:62px;height:62px}.catalog-title h3{font-size:20px}.catalog-copy>p{font-size:14px}.catalog-category{font-size:12px}.catalog-action{min-height:44px;margin:0;justify-self:start}.catalog-product{padding:22px 0}.product-notes{margin-left:78px;font-size:13px}.product-notes summary{min-height:44px;padding-top:9px}.products-section{padding-top:27px}.catalog-filters{gap:0 20px}.catalog-filters button{font-size:13px;min-height:44px}
+  .service-lines>div{display:block;padding:22px 0}.service-lines h3{margin-bottom:10px;font-size:21px}.service-lines>div>span,.service-lines .text-link{display:inline-flex;margin-top:12px;font-size:12px}.service-lines p{font-size:14px}.contact-section .contact-grid{gap:28px}.section h2{font-size:28px}
+}
+@media(max-width:760px){.literary-hero h1{font-size:clamp(28px,12cqi,68px)}.catalog-action{white-space:normal;gap:8px}.catalog-action>span[aria-hidden]{flex-shrink:0}}
+@media(max-width:359px){.wrap{width:calc(100% - 32px)}.brand-name{font-size:15px}.brand-mark{width:30px;height:30px;flex-basis:30px}.brand-en{font-size:7px}.masthead-inner{gap:5px}.index-title{font-size:13px}.hero-index{gap:12px 18px}.literary-hero .hero-description{font-size:15px}}
+@media(prefers-reduced-motion:reduce){.paper-art picture{transform:none!important;transition:none}.hero-index>a:hover .index-title>span{transform:none}}
+@media print{.paper-art,.hero-colophon{display:none}.literary-hero{padding:20px 0}.literary-hero h1{font-size:36px}.hero-index{margin-block:20px}}
