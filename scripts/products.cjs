@@ -56,11 +56,27 @@ function renderProducts(products) {
 </section>`;
 }
 function renderPage(products) {
-  return fs.readFileSync(path.join(root, 'templates/home.html'), 'utf8').replace('<!-- PRODUCTS -->', renderProducts(products));
+  return fs.readFileSync(path.join(root, 'templates/home.html'), 'utf8')
+    .replace('<!-- PRODUCTS -->', renderProducts(products))
+    .replace('<!-- CONSTELLATION -->', renderConstellation(products));
+}
+function renderConstellation(products) {
+  validate(products);
+  const initial = products[0];
+  return `<figure class="constellation" aria-labelledby="constellationTitle">
+    <figcaption class="constellation-heading"><span id="constellationTitle">作品星图</span><span>${products.length} 件作品 · 持续生长</span></figcaption>
+    <div class="constellation-stage">
+      <canvas class="constellation-canvas" aria-hidden="true"></canvas>
+      <div class="constellation-nodes">${products.map((p,i) => `<a class="star-node" href="${escape(p.href)}" data-star-id="${p.id}" data-star-image="${escape(p.image || '')}" data-star-description="${escape(p.description)}" data-star-category="${escape(p.category)}" data-star-mark="${escape(p.mark || p.name[0])}"${i === 0 ? ' data-selected="true"' : ''}${p.href.startsWith('https://') ? ' target="_blank" rel="noopener noreferrer"' : ''}><span class="star-hit">${img(p)}</span><span class="star-label">${escape(p.name)} <span aria-hidden="true">↗</span></span><span class="star-category">${escape(p.category)}</span>${p.href.startsWith('https://') ? '<span class="sr-only">（新标签页）</span>' : ''}</a>`).join('')}</div>
+      <div class="constellation-controls" hidden><button type="button" data-star-rotate="left" aria-label="向左旋转星图">←</button><button type="button" data-star-rotate="right" aria-label="向右旋转星图">→</button><button type="button" data-star-pause aria-pressed="false">暂停转动</button><button type="button" data-star-reset>复位</button></div>
+    </div>
+    <div class="star-caption" role="status" aria-live="polite" aria-atomic="true"><strong>${escape(initial.name)}</strong><p>${escape(initial.description)}</p></div>
+    <p class="star-help">选择一颗星，进入一件作品。<span class="star-drag-hint" hidden>拖动空白处可旋转。</span></p>
+  </figure>`;
 }
 if (require.main === module) {
   const products = JSON.parse(fs.readFileSync(path.join(root, 'data/products.json'), 'utf8'));
   fs.writeFileSync(path.join(root, 'index.html'), renderPage(products));
   console.log(`Generated homepage: ${products.length} products`);
 }
-module.exports = {validate, renderProducts, renderPage, root};
+module.exports = {validate, renderProducts, renderPage, renderConstellation, root};

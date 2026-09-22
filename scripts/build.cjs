@@ -9,5 +9,5 @@ fs.cpSync('characters', 'dist/characters', {recursive:true});
 fs.cpSync('assets/identity', 'dist/assets/identity', {recursive:true});
 fs.cpSync('assets/products', 'dist/assets/products', {recursive:true});
 for (const file of ['index.html','resume.html','robots.txt','sitemap.xml','.nojekyll']) fs.copyFileSync(file, `dist/${file}`);
-for (const file of ['home.css','home-motion.js','catalog.js','styles.css','resume.css','site.js','identity.css','favicon.svg','unilifesim.jpg','certificate.jpg']) fs.copyFileSync(`assets/${file}`, `dist/assets/${file}`);
+for (const file of ['constellation.css','constellation.js','home.css','home-motion.js','catalog.js','styles.css','resume.css','site.js','identity.css','favicon.svg','unilifesim.jpg','certificate.jpg']) fs.copyFileSync(`assets/${file}`, `dist/assets/${file}`);
 console.log('Built public-only static files in dist');

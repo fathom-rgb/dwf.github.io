@@ -7,7 +7,7 @@
     (() => {
       document.documentElement.classList.replace('no-js', 'js');
       let saved; try { saved = localStorage.getItem('site-theme'); } catch {}
-      document.documentElement.dataset.theme = ['light', 'dark'].includes(saved) ? saved : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.dataset.theme = ['light', 'dark'].includes(saved) ? saved : 'dark';
     })();
   </script>
   <title>戴文凡 · 文学 × AI 创作 | 个人主页与产品作品集</title>
@@ -32,6 +32,7 @@
   <link rel="stylesheet" href="assets/styles.css?v=resume-entry-20260913">
   <link rel="stylesheet" href="assets/identity.css?v=portrait-v2">
   <link rel="stylesheet" href="assets/home.css?v=catalog-20260921">
+  <link rel="stylesheet" href="assets/constellation.css?v=stars-20260921">
 </head>
 <body id="top">
   <a class="skip" href="#main">跳到主要内容</a>
@@ -54,16 +55,15 @@
     <section class="hero wrap" aria-labelledby="heroTitle">
       <div class="hero-main">
         <div class="hero-copy">
+          <div class="hero-person">
+            <figure class="identity-portrait"><button class="scholar-button" type="button" aria-label="和小法师打个招呼" disabled><img src="assets/identity/scholar.webp" width="512" height="512" alt="抱书的小法师，戴文凡的个人形象" fetchpriority="high"></button><span class="sr-only scholar-greeting" role="status"></span></figure>
           <p class="hero-intro">你好，我是<strong>戴文凡</strong>。<span>江南大学 · 汉语言文学</span></p>
+          </div>
           <h1 id="heroTitle"><span>从文字出发，</span><span class="accent">把想法做出来。</span></h1>
           <p class="hero-description">用文字梳理想法，用 AI 做出可阅读、可体验的产品。</p>
           <div class="button-row"><a class="button" href="#projects">浏览产品 <span aria-hidden="true">↓</span></a><a class="text-link" href="#about">了解我 <span aria-hidden="true">↗</span></a></div>
         </div>
-        <figure class="identity-portrait">
-          <button class="scholar-button" type="button" aria-label="和小法师打个招呼" title="和小法师打个招呼" disabled><img src="assets/identity/scholar.webp" width="512" height="512" alt="抱书的小法师，戴文凡的个人形象" fetchpriority="high"></button>
-          <span class="sr-only scholar-greeting" role="status"></span>
-          <figcaption>文学 × AI 创作</figcaption>
-        </figure>
+        <!-- CONSTELLATION -->
       </div>
     </section>
     <!-- PRODUCTS -->
@@ -93,5 +93,6 @@
   <script src="assets/site.js?v=certificate-20260913" defer></script>
   <script src="assets/home-motion.js?v=catalog-20260921" defer></script>
   <script src="assets/catalog.js?v=catalog-20260921" defer></script>
+  <script src="assets/constellation.js?v=stars-20260921" defer></script>
 </body>
 </html>

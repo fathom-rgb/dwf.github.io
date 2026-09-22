@@ -9,7 +9,7 @@
         root.dataset.theme = theme;
         themeButton.setAttribute('aria-pressed', String(theme === 'dark'));
         themeButton.setAttribute('aria-label', theme === 'dark' ? '切换至浅色主题' : '切换至深色主题');
-        document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#1b211e' : '#f7f5ef';
+        document.querySelector('meta[name="theme-color"]').content = getComputedStyle(root).getPropertyValue('--paper').trim();
       }
       applyTheme(root.dataset.theme);
       themeButton.addEventListener('click', () => {
@@ -88,4 +88,3 @@
         announce(copied ? `${button.dataset.label}已复制` : `请长按或选中文字复制：${button.dataset.copy}`);
       }));
     })();
-

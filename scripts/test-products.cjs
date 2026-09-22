@@ -1,13 +1,17 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
-const {renderProducts, validate, root} = require('./products.cjs');
+const {renderProducts, renderConstellation, validate, root} = require('./products.cjs');
 const products = JSON.parse(fs.readFileSync(path.join(root, 'data/products.json'), 'utf8'));
 const html = renderProducts(products);
 assert.equal((html.match(/class="catalog-product"/g) || []).length, products.length);
 assert.equal((html.match(/class="featured-product"/g) || []).length, Math.min(3, products.filter(p => p.featured).length));
 const mock = {id:'test-new-product', name:'新增产品 <测试>', description:'这是测试数据，不会发布。', category:'实验项目', status:'原型展示', href:'https://example.com/', action:'体验原型'};
 const expanded = renderProducts([...products, mock]);
+const stars = renderConstellation([...products, mock]);
+assert.equal((stars.match(/class="star-node"/g) || []).length, products.length + 1);
+assert(stars.includes('新增产品 &lt;测试&gt;'));
+for (const p of products) assert(stars.includes(`href="${p.href}"`));
 assert(expanded.includes('id="test-new-product"'));
 assert(expanded.includes('data-category-filter="实验项目"'));
 assert(expanded.includes('新增产品 &lt;测试&gt;'));
