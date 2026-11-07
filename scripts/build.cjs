@@ -6,6 +6,7 @@ require('./test-products.cjs');
 fs.rmSync('dist', {recursive:true, force:true});
 fs.mkdirSync('dist/assets', {recursive:true});
 fs.cpSync('characters', 'dist/characters', {recursive:true});
+fs.cpSync('stride', 'dist/stride', {recursive:true});
 fs.cpSync('assets/identity', 'dist/assets/identity', {recursive:true});
 fs.cpSync('assets/products', 'dist/assets/products', {recursive:true});
 fs.cpSync('assets/editorial', 'dist/assets/editorial', {recursive:true});
